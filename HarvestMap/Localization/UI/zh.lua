@@ -1,5 +1,5 @@
 
-Harvest.defaultLocalizedStrings = {
+Harvest.localizedStrings = {
 	-- conflict message for settings that don't work with Fyrakin's minimap
 	["minimapconflict"] = "This option is incompatible with Fyrakin's minimap.",
 	-- top level description
@@ -184,20 +184,3 @@ Nodes per kilometer: <<3>>]],
 	["HARVESTFARM_EDITOR"] = "Edit tour",
 	["HARVESTFARM_SAVE"] = "Save/Load tour",
 }
-
-local default = Harvest.defaultLocalizedStrings
-local current = Harvest.localizedStrings or {}
-
-function Harvest.GetLocalization(tag)
-	-- return the localization for the given tag,
-	-- if the localization is missing, use the english string instead
-	-- if the english string is missing, something went wrong.
-	-- return the tag so that at least some string is returned to prevent the addon from crashing
-	return (current[ tag ] or default[ tag ]) or tag
-end
-
-local UIStrings = {"SI_BINDING_NAME_SKIP_TARGET", "SI_BINDING_NAME_TOGGLE_WORLDPINS", "SI_BINDING_NAME_TOGGLE_MAPPINS", "SI_BINDING_NAME_HARVEST_SHOW_PANEL",
-		"SI_HARVEST_CTRLC", "HARVESTFARM_GENERATOR","HARVESTFARM_EDITOR","HARVESTFARM_SAVE"}
-for _, str in pairs(UIStrings) do
-	ZO_CreateStringId(str, Harvest.GetLocalization(str))
-end
