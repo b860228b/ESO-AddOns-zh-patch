@@ -9404,7 +9404,7 @@ local function OnLoad(eventCode, name)
 		--Check Language, Addon not yet localized
 		localLanguage = GetCVar("language.2") or "en"
 		
-		if not (localLanguage == "en" or localLanguage == "es" or localLanguage == "de" or localLanguage == "fr" or localLanguage == "jp" or localLanguage == "ru") then
+		if not (localLanguage == "en" or localLanguage == "es" or localLanguage == "de" or localLanguage == "fr" or localLanguage == "jp" or localLanguage == "ru" or localLanguage == "zh") then
 			--chat messages aren't shown before player is activated
 			EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_PLAYER_ACTIVATED, ShowLanguageWarning)
 		end
