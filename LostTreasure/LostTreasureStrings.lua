@@ -244,4 +244,39 @@ LOST_TREASURE_STRINGS = {
     MARKER_DELAY = "BETA : Atraso para Apagar Marcador",
     MARKER_DELAY_TOOLTIP = "Inclui um atraso antes de apagar uma locação marcada no mapa. Só funciona em conjunto com Marca em Uso ou Marca Tudo no Inventário. Isso não funcionará quando você abrir o mapa quando está atualizando todos os pins.",
   },
+    ["zh"] = {
+    TREASURE_ON_MAP = "Show Treasure on Map",
+    TREASURE_ON_MAP_TOOLTIP = "Show treasure map locations on player map?",
+    TREASURE_ON_COMPASS = "Show Treasure on Compass",
+    TREASURE_ON_COMPASS_TOOLTIP = "Show treasure map locations on compass bar?",
+    TREASURE_ICON = "Treasure Pin Texture",
+    TREASURE_ICON_TOOLTIP = "Which pin texture to use for treasure map locations",
+    TREASURE_MARK_WHICH = "Treasure Map Marking",
+    TREASURE_MARK_WHICH_TOOLTIP = "When to mark treasure locations on the player map",
+    
+    SURVEYS_ON_MAP = "Show Crafting Surveys on Map",
+    SURVEYS_ON_MAP_TOOLTIP = "Show crafting survey locations on player map?",
+    SURVEYS_ON_COMPASS = "Show Crafting Surveys on Compass",
+    SURVEYS_ON_COMPASS_TOOLTIP = "Show crafting survey locations on compass bar?",
+    SURVEYS_ICON = "Survey Pin Texture",
+    SURVEYS_ICON_TOOLTIP = "Which pin texture to use for crafting survey locations",
+    SURVEYS_MARK_WHICH = "Survey Map Marking",
+    SURVEYS_MARK_WHICH_TOOLTIP = "When to mark survey locations on the player map",
+    
+    PIN_SIZE = "Pin Texture Size",
+    PIN_SIZE_TOOLTIP = "Size of the pin",
+    
+    PIN_LEVEL = "Pin Map Level",
+    PIN_LEVEL_TOOLTIP = "Higher level draws pin over lower level pins. Increase if pin is obscured by other pins.",
+    
+    SHOW_MINIMAP = "Show Mini Treasure Map",
+    SHOW_MINIMAP_TOOLTIP = "Show the mini treasure map on screen when using map from inventory?",
+    
+    MARK_MAP_MENU_OPTION1 = "Mark on use",
+    MARK_MAP_MENU_OPTION2 = "Mark all in inventory",
+    MARK_MAP_MENU_OPTION3 = "Mark all locations",
+    
+    MARKER_DELAY = "BETA : Marker Deletion Delay",
+    MARKER_DELAY_TOOLTIP = "Adds a delay before deleting a marked location on the map. Only works in conjunction with Mark on Use or Mark all in Inventory. This will not work when you open up the map as it refreshes all pins then.",
+  },
 }
