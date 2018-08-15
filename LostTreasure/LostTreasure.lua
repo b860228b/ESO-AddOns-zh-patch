@@ -101,12 +101,14 @@ local TREASURE_TEXT = {
   de = "schatzkarte",
   fr = "carte au trésor",
   ru = "карта сокровищ",
+  zh = "藏宝图",
 }
 local SURVEYS_TEXT = {
   en = "survey:",
   de = "gutachten",
   fr = "repérages",
   ru = "исследование",
+  zh = "调查：",
 }
 
 LT.dirtyPins = {}
