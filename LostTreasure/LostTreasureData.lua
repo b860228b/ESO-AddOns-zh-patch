@@ -53,13 +53,13 @@ LOST_TREASURE_DATA = {
 ----Grahtwood
   ["grahtwood"] = {
     ["treasure"] = {
-      {0.3951,  0.6750,  [[Grahtwood Treasure Map I]],   [[Grahtwald Schatzkarte I]],   [[Carte Au Trésor du bois de Graht I]],   [[グラーウッドの宝の地図1]],    [[Гратвуд, карта сокровищ I]],             [[treasuremap_grahtwood_01]],            43631 },
-      {0.6496,  0.4778,  [[Grahtwood Treasure Map II]],  [[Grahtwald Schatzkarte II]],  [[Carte Au Trésor du bois de Graht II]],  [[グラーウッドの宝の地図2]],    [[Гратвуд, карта сокровищ II]],            [[treasuremap_grahtwood_02]],            43632 },
-      {0.6290,  0.3810,  [[Grahtwood Treasure Map III]], [[Grahtwald Schatzkarte III]], [[Carte Au Trésor du bois de Graht III]], [[グラーウッドの宝の地図3]],    [[Гратвуд, карта сокровищ III]],           [[treasuremap_grahtwood_03]],            43633 },
-      {0.4735,  0.3407,  [[Grahtwood Treasure Map IV]],  [[Grahtwald Schatzkarte IV]],  [[Carte Au Trésor du bois de Graht IV]],  [[グラーウッドの宝の地図4]],    [[Гратвуд, карта сокровищ IV]],            [[treasuremap_grahtwood_04]],            43634 },
-      {0.3550,  0.3562,  [[Grahtwood Treasure Map V]],   [[Grahtwald Schatzkarte V]],   [[Carte Au Trésor du bois de Graht V]],   [[グラーウッドの宝の地図5]],    [[Гратвуд, карта сокровищ V]],             [[treasuremap_grahtwood_05]],            43635 },
-      {0.4696,  0.4718,  [[Grahtwood Treasure Map VI]],  [[Grahtwald Schatzkarte VI]],  [[Carte Au Trésor du bois de Graht VI]],  [[グラーウッドの宝の地図6]],    [[Гратвуд, карта сокровищ VI]],            [[treasuremap_grahtwood_06]],            43636 },
-      {0.3128,  0.6006,  [[Grahtwood CE Treasure Map]],  [[Grahtwald CE Schatzkarte]],  [[Carte Au Trésor du bois de Graht EC]],  [[グラーウッドの宝の地図(CE)]], [[Гратвуд, коллекционная карта сокровищ]], [[treasuremap_ce_aldmeri_grahtwood_03]], 44937 },
+      {0.3951,  0.6750,  [[Grahtwood Treasure Map I]],   [[Grahtwald Schatzkarte I]],   [[Carte Au Trésor du bois de Graht I]],   [[グラーウッドの宝の地図1]],    [[Гратвуд, карта сокровищ I]],             [[Grahtwood Treasure Map I]],   [[treasuremap_grahtwood_01]],            43631 },
+      {0.6496,  0.4778,  [[Grahtwood Treasure Map II]],  [[Grahtwald Schatzkarte II]],  [[Carte Au Trésor du bois de Graht II]],  [[グラーウッドの宝の地図2]],    [[Гратвуд, карта сокровищ II]],            [[Grahtwood Treasure Map II]],  [[treasuremap_grahtwood_02]],            43632 },
+      {0.6290,  0.3810,  [[Grahtwood Treasure Map III]], [[Grahtwald Schatzkarte III]], [[Carte Au Trésor du bois de Graht III]], [[グラーウッドの宝の地図3]],    [[Гратвуд, карта сокровищ III]],           [[Grahtwood Treasure Map III]], [[treasuremap_grahtwood_03]],            43633 },
+      {0.4735,  0.3407,  [[Grahtwood Treasure Map IV]],  [[Grahtwald Schatzkarte IV]],  [[Carte Au Trésor du bois de Graht IV]],  [[グラーウッドの宝の地図4]],    [[Гратвуд, карта сокровищ IV]],            [[Grahtwood Treasure Map IV]],  [[treasuremap_grahtwood_04]],            43634 },
+      {0.3550,  0.3562,  [[Grahtwood Treasure Map V]],   [[Grahtwald Schatzkarte V]],   [[Carte Au Trésor du bois de Graht V]],   [[グラーウッドの宝の地図5]],    [[Гратвуд, карта сокровищ V]],             [[Grahtwood Treasure Map V]],   [[treasuremap_grahtwood_05]],            43635 },
+      {0.4696,  0.4718,  [[Grahtwood Treasure Map VI]],  [[Grahtwald Schatzkarte VI]],  [[Carte Au Trésor du bois de Graht VI]],  [[グラーウッドの宝の地図6]],    [[Гратвуд, карта сокровищ VI]],            [[Grahtwood Treasure Map VI]],  [[treasuremap_grahtwood_06]],            43636 },
+      {0.3128,  0.6006,  [[Grahtwood CE Treasure Map]],  [[Grahtwald CE Schatzkarte]],  [[Carte Au Trésor du bois de Graht EC]],  [[グラーウッドの宝の地図(CE)]], [[Гратвуд, коллекционная карта сокровищ]], [[Grahtwood CE Treasure Map]],  [[treasuremap_ce_aldmeri_grahtwood_03]], 44937 },
     },
     ["surveys"] = {
       {0.7674,  0.4693,  [[Blacksmith Survey: Grahtwood]],       [[Schmiedegutachten: Grahtwald]],       [[Repérages de Forgeron : Bois de Graht]],            [[鍛冶師の調査報告: グラーウッド]],       [[исследование кузнеца: Гратвуд]],      [[grahtwood_survey_blacksmith]], 57747 },
