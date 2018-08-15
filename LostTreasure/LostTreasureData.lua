@@ -7,46 +7,47 @@
   MAP_NAME_FR = 5,
   MAP_NAME_JP = 6,
   MAP_NAME_RU = 7,
-  TEXTURE = 8,
-  ITEMID = 9,
+  MAP_NAME_ZH = 8,
+  TEXTURE = 9,
+  ITEMID = 10,
 }
 
 LOST_TREASURE_DATA = {
 ----Khenarthi's Roost
   ["khenarthisroost"] = {
     ["treasure"] = {
-      {0.6119,  0.7579,  [[Khenarthi's Roost Treasure Map I]],     [[Khenarthis Rast Schatzkarte I]],     [[Carte Au Trésor du perchoir de Khenarthi I]],     [[ケナーシズルーストの宝の地図1]],     [[Гнездо Кенарти, карта сокровищ I]],                [[treasuremap_khenarthi_01]],             43695 },
-      {0.2254,  0.3140,  [[Khenarthi's Roost Treasure Map II]],    [[Khenarthis Rast Schatzkarte II]],    [[Carte Au Trésor du perchoir de Khenarthi II]],    [[ケナーシズルーストの宝の地図2]],     [[Гнездо Кенарти, карта сокровищ II]],               [[treasuremap_khenarthi_02]],             43696 },
-      {0.4102,  0.5848,  [[Khenarthi's Roost Treasure Map III]],   [[Khenarthis Rast Schatzkarte III]],   [[Carte Au Trésor du perchoir de Khenarthi III]],   [[ケナーシズルーストの宝の地図3]],     [[Гнездо Кенарти, карта сокровищ III]],              [[treasuremap_khenarthi_03]],             43697 },
-      {0.7739,  0.3376,  [[Khenarthi's Roost Treasure Map IV]],    [[Khenarthis Rast Schatzkarte IV]],    [[Carte Au Trésor du perchoir de Khenarthi IV]],    [[ケナーシズルーストの宝の地図4]],     [[Гнездо Кенарти, карта сокровищ VI]],               [[treasuremap_khenarthi_04]],             43698 },
-      {0.6168,  0.8328,  [[Khenarthi's Roost CE Treasure Map I]],  [[Khenarthis Rast CE Schatzkarte I]],  [[Carte Au Trésor du perchoir de Khenarthi EC I]],  [[ケナーシズルーストの宝の地図1(CE)]], [[Гнездо Кенарти, коллекционная карта сокровищ I]],  [[treasuremap_ce_aldmeri_khenarthi_01a]], 44939 },
-      {0.3990,  0.3665,  [[Khenarthi's Roost CE Treasure Map II]], [[Khenarthis Rast CE Schatzkarte II]], [[Carte Au Trésor du perchoir de Khenarthi EC II]], [[ケナーシズルーストの宝の地図2(CE)]], [[Гнездо Кенарти, коллекционная карта сокровищ II]], [[treasuremap_ce_aldmeri_khenarthi_01b]], 45010 },
+      {0.6119,  0.7579,  [[Khenarthi's Roost Treasure Map I]],     [[Khenarthis Rast Schatzkarte I]],     [[Carte Au Trésor du perchoir de Khenarthi I]],     [[ケナーシズルーストの宝の地図1]],     [[Гнездо Кенарти, карта сокровищ I]],                [[Khenarthi's Roost Treasure Map I]],     [[treasuremap_khenarthi_01]],             43695 },
+      {0.2254,  0.3140,  [[Khenarthi's Roost Treasure Map II]],    [[Khenarthis Rast Schatzkarte II]],    [[Carte Au Trésor du perchoir de Khenarthi II]],    [[ケナーシズルーストの宝の地図2]],     [[Гнездо Кенарти, карта сокровищ II]],               [[Khenarthi's Roost Treasure Map II]],    [[treasuremap_khenarthi_02]],             43696 },
+      {0.4102,  0.5848,  [[Khenarthi's Roost Treasure Map III]],   [[Khenarthis Rast Schatzkarte III]],   [[Carte Au Trésor du perchoir de Khenarthi III]],   [[ケナーシズルーストの宝の地図3]],     [[Гнездо Кенарти, карта сокровищ III]],              [[Khenarthi's Roost Treasure Map III]],   [[treasuremap_khenarthi_03]],             43697 },
+      {0.7739,  0.3376,  [[Khenarthi's Roost Treasure Map IV]],    [[Khenarthis Rast Schatzkarte IV]],    [[Carte Au Trésor du perchoir de Khenarthi IV]],    [[ケナーシズルーストの宝の地図4]],     [[Гнездо Кенарти, карта сокровищ VI]],               [[Khenarthi's Roost Treasure Map IV]],    [[treasuremap_khenarthi_04]],             43698 },
+      {0.6168,  0.8328,  [[Khenarthi's Roost CE Treasure Map I]],  [[Khenarthis Rast CE Schatzkarte I]],  [[Carte Au Trésor du perchoir de Khenarthi EC I]],  [[ケナーシズルーストの宝の地図1(CE)]], [[Гнездо Кенарти, коллекционная карта сокровищ I]],  [[Khenarthi's Roost CE Treasure Map I]],  [[treasuremap_ce_aldmeri_khenarthi_01a]], 44939 },
+      {0.3990,  0.3665,  [[Khenarthi's Roost CE Treasure Map II]], [[Khenarthis Rast CE Schatzkarte II]], [[Carte Au Trésor du perchoir de Khenarthi EC II]], [[ケナーシズルーストの宝の地図2(CE)]], [[Гнездо Кенарти, коллекционная карта сокровищ II]], [[Khenarthi's Roost CE Treasure Map II]], [[treasuremap_ce_aldmeri_khenarthi_01b]], 45010 },
     },
   },
 ----Auridon
   ["auridon"] = {
     ["treasure"] = {
-      {0.4934,  0.8891,  [[Auridon Treasure Map I]],   [[Auridon Schatzkarte I]],   [[Carte Au Trésor d'Auridia I]],   [[オーリドンの宝の地図1]],    [[Ауридон, карта сокровищ I]],             [[treasuremap_auridon_01]],            43625 },
-      {0.4850,  0.6411,  [[Auridon Treasure Map II]],  [[Auridon Schatzkarte II]],  [[Carte Au Trésor d'Auridia II]],  [[オーリドンの宝の地図2]],    [[Ауридон, карта сокровищ II]],            [[treasuremap_auridon_02]],            43626 },
-      {0.4419,  0.5074,  [[Auridon Treasure Map III]], [[Auridon Schatzkarte III]], [[Carte Au Trésor d'Auridia III]], [[オーリドンの宝の地図3]],    [[Ауридон, карта сокровищ III]],           [[treasuremap_auridon_03]],            43627 },
-      {0.6641,  0.4114,  [[Auridon Treasure Map IV]],  [[Auridon Schatzkarte IV]],  [[Carte Au Trésor d'Auridia IV]],  [[オーリドンの宝の地図4]],    [[Ауридон, карта сокровищ IV]],            [[treasuremap_auridon_04]],            43628 },
-      {0.5000,  0.2525,  [[Auridon Treasure Map V]],   [[Auridon Schatzkarte V]],   [[Carte Au Trésor d'Auridia V]],   [[オーリドンの宝の地図5]],    [[Ауридон, карта сокровищ V]],             [[treasuremap_auridon_05]],            43629 },
-      {0.3385,  0.1318,  [[Auridon Treasure Map VI]],  [[Auridon Schatzkarte VI]],  [[Carte Au Trésor d'Auridia VI]],  [[オーリドンの宝の地図6]],    [[Ауридон, карта сокровищ VI]],            [[treasuremap_auridon_06]],            43630 },
-      {0.6881,  0.9678,  [[Auridon CE Treasure Map]],  [[Auridon CE Schatzkarte]],  [[Carte Au Trésor d'Auridia EC]],  [[オーリドンの宝の地図(CE)]], [[Ауридон, коллекционная карта сокровищ]], [[treasuremap_ce_aldmeri_auridon_02]], 44927 },
+      {0.4934,  0.8891,  [[Auridon Treasure Map I]],   [[Auridon Schatzkarte I]],   [[Carte Au Trésor d'Auridia I]],   [[オーリドンの宝の地図1]],    [[Ауридон, карта сокровищ I]],             [[Auridon Treasure Map I]],   [[treasuremap_auridon_01]],            43625 },
+      {0.4850,  0.6411,  [[Auridon Treasure Map II]],  [[Auridon Schatzkarte II]],  [[Carte Au Trésor d'Auridia II]],  [[オーリドンの宝の地図2]],    [[Ауридон, карта сокровищ II]],            [[Auridon Treasure Map II]],  [[treasuremap_auridon_02]],            43626 },
+      {0.4419,  0.5074,  [[Auridon Treasure Map III]], [[Auridon Schatzkarte III]], [[Carte Au Trésor d'Auridia III]], [[オーリドンの宝の地図3]],    [[Ауридон, карта сокровищ III]],           [[Auridon Treasure Map III]], [[treasuremap_auridon_03]],            43627 },
+      {0.6641,  0.4114,  [[Auridon Treasure Map IV]],  [[Auridon Schatzkarte IV]],  [[Carte Au Trésor d'Auridia IV]],  [[オーリドンの宝の地図4]],    [[Ауридон, карта сокровищ IV]],            [[Auridon Treasure Map IV]],  [[treasuremap_auridon_04]],            43628 },
+      {0.5000,  0.2525,  [[Auridon Treasure Map V]],   [[Auridon Schatzkarte V]],   [[Carte Au Trésor d'Auridia V]],   [[オーリドンの宝の地図5]],    [[Ауридон, карта сокровищ V]],             [[Auridon Treasure Map V]],   [[treasuremap_auridon_05]],            43629 },
+      {0.3385,  0.1318,  [[Auridon Treasure Map VI]],  [[Auridon Schatzkarte VI]],  [[Carte Au Trésor d'Auridia VI]],  [[オーリドンの宝の地図6]],    [[Ауридон, карта сокровищ VI]],            [[Auridon Treasure Map VI]],  [[treasuremap_auridon_06]],            43630 },
+      {0.6881,  0.9678,  [[Auridon CE Treasure Map]],  [[Auridon CE Schatzkarte]],  [[Carte Au Trésor d'Auridia EC]],  [[オーリドンの宝の地図(CE)]], [[Ауридон, коллекционная карта сокровищ]], [[Auridon CE Treasure Map]],  [[treasuremap_ce_aldmeri_auridon_02]], 44927 },
     },
     ["surveys"] = {
-      {0.4085,  0.7007,  [[Clothier Survey: Auridon]],         [[Schneidergutachten: Auridon]],      [[Repérages de Tailleur : Auridia]],            [[仕立師の調査報告: オーリドン]],       [[исследование портного: Ауридон]],     [[auridon_survey_clothier]],   57738  },
-      {0.5451,  0.3001,  [[Alchemist Survey: Auridon]],        [[Alchemistengutachten: Auridon]],    [[Repérages d'Alchemiste : Auridia]],           [[錬金術師の調査報告: オーリドン]],     [[исследование алхимика: Ауридон]],     [[auridon_survey_alchemist]],  57744  },
-      {0.4449,  0.2856,  [[Enchanter Survey: Auridon]],        [[Verzauberergutachten: Auridon]],    [[Repérages d'Enchanteur : Auridia]],           [[付呪師の調査報告: オーリドン]],       [[исследование зачарователя: Ауридон]], [[auridon_survey_enchanter]],  57733  },
-      {0.5483,  0.4650,  [[Woodworker Survey: Auridon]],       [[Schreinergutachten: Auridon]],      [[Repérages de Travailleur du Bois : Auridia]], [[木工師の調査報告: オーリドン]],       [[исследование столяра: Ауридон]],      [[auridon_survey_woodworker]], 57741  },
-      {0.6359,  0.6950,  [[Blacksmith Survey: Auridon]],       [[Schmiedegutachten: Auridon]],       [[Repérages de Forgeron : Auridia]],            [[鍛冶師の調査報告: オーリドン]],       [[исследование кузнеца: Ауридон]],      [[auridon_survey_blacksmith]], 57687  },
-      {0.3988,  0.6122,  [[Jewelry Crafting Survey: Auridon]], [[Jewelry Crafting Survey: Auridon]], [[Jewelry Crafting Survey: Auridon]],           [[Jewelry Crafting Survey: Auridon]], [[Jewelry Crafting Survey: Auridon]],   nil,                           139422 },
+      {0.4085,  0.7007,  [[Clothier Survey: Auridon]],         [[Schneidergutachten: Auridon]],      [[Repérages de Tailleur : Auridia]],            [[仕立師の調査報告: オーリドン]],       [[исследование портного: Ауридон]],     [[Clothier Survey: Auridon]],         [[auridon_survey_clothier]],   57738  },
+      {0.5451,  0.3001,  [[Alchemist Survey: Auridon]],        [[Alchemistengutachten: Auridon]],    [[Repérages d'Alchemiste : Auridia]],           [[錬金術師の調査報告: オーリドン]],     [[исследование алхимика: Ауридон]],     [[Alchemist Survey: Auridon]],        [[auridon_survey_alchemist]],  57744  },
+      {0.4449,  0.2856,  [[Enchanter Survey: Auridon]],        [[Verzauberergutachten: Auridon]],    [[Repérages d'Enchanteur : Auridia]],           [[付呪師の調査報告: オーリドン]],       [[исследование зачарователя: Ауридон]], [[Enchanter Survey: Auridon]],        [[auridon_survey_enchanter]],  57733  },
+      {0.5483,  0.4650,  [[Woodworker Survey: Auridon]],       [[Schreinergutachten: Auridon]],      [[Repérages de Travailleur du Bois : Auridia]], [[木工師の調査報告: オーリドン]],       [[исследование столяра: Ауридон]],      [[Woodworker Survey: Auridon]],       [[auridon_survey_woodworker]], 57741  },
+      {0.6359,  0.6950,  [[Blacksmith Survey: Auridon]],       [[Schmiedegutachten: Auridon]],       [[Repérages de Forgeron : Auridia]],            [[鍛冶師の調査報告: オーリドン]],       [[исследование кузнеца: Ауридон]],      [[Blacksmith Survey: Auridon]],       [[auridon_survey_blacksmith]], 57687  },
+      {0.3988,  0.6122,  [[Jewelry Crafting Survey: Auridon]], [[Jewelry Crafting Survey: Auridon]], [[Jewelry Crafting Survey: Auridon]],           [[Jewelry Crafting Survey: Auridon]],   [[Jewelry Crafting Survey: Auridon]],   [[Jewelry Crafting Survey: Auridon]], nil,                           139422 },
     },
   },
 ----Auridon, Vulkhel Guard
   ["vulkhelguard"] = {
     ["treasure"] = {
-      {0.9143,  0.7058,  [[Auridon CE Treasure Map]], [[Auridon CE Schatzkarte]], [[Carte Au Trésor d'Auridia EC]], [[オーリドンの宝の地図(CE)]], [[Ауридон, коллекционная карта сокровищ]], [[treasuremap_ce_aldmeri_auridon_02]], 44927 },
+      {0.9143,  0.7058,  [[Auridon CE Treasure Map]], [[Auridon CE Schatzkarte]], [[Carte Au Trésor d'Auridia EC]], [[オーリドンの宝の地図(CE)]], [[Ауридон, коллекционная карта сокровищ]], [[Auridon CE Treasure Map]], [[treasuremap_ce_aldmeri_auridon_02]], 44927 },
     },
   },
 ----Grahtwood
