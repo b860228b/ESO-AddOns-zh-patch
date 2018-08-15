@@ -54,3 +54,10 @@ SafeAddString(SKYS_COLLECTED_DESC,        "在地图上显示/隐藏已收集的
 --worldmap filters
 SafeAddString(SKYS_FILTER_UNKNOWN,        "未知的天空碎片", 1)
 SafeAddString(SKYS_FILTER_COLLECTED,      "收集的天空碎片", 1)
+
+-- Immersive Mode	
+SafeAddString(SKYS_IMMERSIVE,             "启用沉浸模式基于...", 1)	
+SafeAddString(SKYS_IMMERSIVE_DESC,        "根据你所查看的当前区域的以下任務的完成情况，将不会显示未知的天空碎片", 1)	
+SafeAddString(SKYS_IMMERSIVE_CHOICE1,     "禁用", 1)	
+SafeAddString(SKYS_IMMERSIVE_CHOICE2,     "区域主線任务", 1)	
+SafeAddString(SKYS_IMMERSIVE_CHOICE5,     "区域任务", 1)
