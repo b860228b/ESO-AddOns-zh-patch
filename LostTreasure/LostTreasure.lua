@@ -673,7 +673,7 @@ function LT:EVENT_ADD_ON_LOADED(event, name)
 
   compassLayout_Treasure.texture = pinTextures[LT.SavedVariables.treasurePinTexture]
   LMP:AddPinType(MAP_PIN_TYPES.treasure, function() pinCreator("treasure") end, nil, pinLayout_Treasure, pinTooltipCreator)
-  LMP:AddPinFilter(MAP_PIN_TYPES.treasure, "Lost Treasure Maps", false, LT.SavedVariables, "showTreasure")
+  LMP:AddPinFilter(MAP_PIN_TYPES.treasure, "失落的藏宝图", false, LT.SavedVariables, "showTreasure")
   COMPASS_PINS:AddCustomPin(COMPASS_PIN_TYPES.treasure, function() compassCallback("treasure") end, compassLayout_Treasure)
 
   pinLayout_Surveys.texture = pinTextures[LT.SavedVariables.surveysPinTexture]
@@ -682,7 +682,7 @@ function LT:EVENT_ADD_ON_LOADED(event, name)
 
   compassLayout_Surveys.texture = pinTextures[LT.SavedVariables.surveysPinTexture]
   LMP:AddPinType(MAP_PIN_TYPES.surveys, function() pinCreator("surveys") end, nil, pinLayout_Surveys, pinTooltipCreator)
-  LMP:AddPinFilter(MAP_PIN_TYPES.surveys, "Lost Treasure Survey Maps", false, LT.SavedVariables, "showSurveys")
+  LMP:AddPinFilter(MAP_PIN_TYPES.surveys, "失落的宝藏调查地图", false, LT.SavedVariables, "showSurveys")
   COMPASS_PINS:AddCustomPin(COMPASS_PIN_TYPES.surveys, function() compassCallback("surveys") end, compassLayout_Surveys)
 
   createLAM2Panel()
