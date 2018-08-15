@@ -54,13 +54,13 @@ local markMapMenuOptions = {
 }
 
 local pinTexturesList = {
-  [1] = [[X red]],
-  [2] = [[X black]],
-  [3] = [[Map black]],
-  [4] = [[Map white]],
-  [5] = [[Justice Stolen Map]],
-  [6] = [[Scroll]],
-  [7] = [[Delivery Box]],
+  [1] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION1,
+  [2] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION2,
+  [3] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION3,
+  [4] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION4,
+  [5] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION5,
+  [6] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION6,
+  [7] = LOST_TREASURE_STRINGS[lang].PIN_TREASURE_OPTION7,
 }
 
 local pinTextures = {
@@ -652,7 +652,7 @@ function LT:EVENT_ADD_ON_LOADED(event, name)
   elseif lang == "br" then
     LOST_TREASURE_INDEX.MAP_NAME = LOST_TREASURE_INDEX.MAP_NAME_EN
   elseif lang == "zh" then
-    LOST_TREASURE_INDEX.MAP_NAME = LOST_TREASURE_INDEX.MAP_NAME_ZH
+    LOST_TREASURE_INDEX.MAP_NAME = LOST_TREASURE_INDEX.MAP_NAME_EN
   else
     lang = "en"
     LOST_TREASURE_INDEX.MAP_NAME = LOST_TREASURE_INDEX.MAP_NAME_EN
