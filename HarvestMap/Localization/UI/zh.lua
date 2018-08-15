@@ -1,0 +1,185 @@
+Harvest.localizedStrings = {
+	-- conflict message for settings that don't work with Fyrakin's minimap
+	["minimapconflict"] = "此选项与Fyrakin的小地图不兼容。",
+	-- top level description
+	["esouidescription"] = "有关插件的说明和常见问题，请访问esoui.com上的插件页面",
+	["openesoui"] = "开启ESOUI",
+	["exchangedescription"] = "你可以通过在HarvestMap文件夹中执行'DownloadNewData.command'(MacOS)或'DownloadNewData.bat'(Windows)来下载最新的HarvestMap数据(资源的位置)。有关此内容的更多信息，请参阅ESOUI插件说明。",
+	["debuginfodescription"] = "如果你想在esoui.c​​om评论页面上回报错误，请同时添加以下调试信息：",
+	["printdebuginfo"] = "复制调试信息",
+	
+	-- outdated data settings
+	["outdateddata"] = "过时的数据设置",
+	["outdateddatainfo"] = "这些数据相关设置在此电脑上的所有帐户和角色之间共享。",
+	["mingameversion"] = "最低游戏版本",
+	["mingameversiontooltip"] = "HarvestMap只会保留这个和比这个更新版本的ESO的数据。",
+	["timedifference"] = "仅保留最近的数据",
+	["timedifferencetooltip"] = "HarvestMap将仅保留最近X天的数据。\n这可以防止显示可能已经过时的旧数据。\n设置为0以保留任何数据，无论其年龄為何。",
+	["applywarning"] = "一旦删除旧数据后，它將无法恢复！",
+	
+	-- account wide settings
+	["account"] = "帐户通用设置",
+	["accounttooltip"] = "使以下所有设置对于每个角色都是相同的。",
+	["accountwarning"] = "更改此设置将重新加载UI。",
+	
+	--performance settings
+	["performance"] = "性能和兼容性",
+	["minimapcompatibilitymodedescription"] = "为了提高当地图上显示了数千个资源位置时的性能，HarvestMap创建了它自己的轻量级版的地图图钉。这些轻量级地图图与旋转小地图不兼容。\n如果你使用着旋转 小地图，你可以启用'小地图兼容模式'。启用此模式后，HarvestMap将使用默认地图图钉而不是轻量级图钉。这些默认图钉可用于旋转迷你地图，但只要当显示具有许多已知资源位置的地图时，它就会导致低FPS并且游戏会冻结几秒钟。",
+	["minimapcompatibilitymode"] = "小地图兼容模式",
+	["minimapcompatibilitymodewarning"] = "启用此选项将对游戏的性能产生负面影响，当地图上显示许多图钉时。\n\n更改此设置将重新加载UI！",
+	["hasdrawdistance"] = "仅显示附近的地图图钉",
+	["hasdrawdistancetooltip"] = "启用后，HarvestMap将仅为臨近玩家的收获位置创建地图图钉。\ n此设置仅影响游戏地图。在小地图上，此选项会自动启用！",
+	["hasdrawdistancewarning"] = "此设置仅影响游戏地图。在小地图上，此选项会自动启用！",
+	["drawdistance"] = "地图图钉距离",
+	["drawdistancetooltip"] = "绘制地图图钉的距离阈值。此设置也会影响小地图！",
+	["drawdistancewarning"] = "此设置也会影响小地图！",
+	
+	-- respawn timer settings
+	["farmandrespawn"] = "重长计时器和农业助手",
+	["rangemultiplier"] = "访问的节点范围",
+	["rangemultipliertooltip"] = "X米内的节点將被认为已被重长计时器和农业助手访问過的。",
+	["hiddentime"] = "重长计时器",
+	["hiddentimetooltip"] = "最近的访问過的图钉将被隐藏X分钟。",
+	["hiddenonharvestwarning"] = "关闭此选项可能会对游戏的性能产生负面影响。",
+	["hiddenonharvest"] = "仅在收获时使用重长计时器",
+	["hiddenonharvesttooltip"] = "启用它，使图钉仅在收获它们后才隐藏。当禁用时，图钉也会在访问它们后隐藏。",
+	
+	-- compass and world pin settings
+	["compassandworld"] = "罗盘和3D图钉",
+	["compass"] = "启用罗盘",
+	["compasstooltip"] = "启用罗盘上的靠近图钉显示。可以禁用以提高性能。",
+	["compassdistance"] = "最大图钉距离",
+	["compassdistancetooltip"] = "罗盘上显示的图钉的最大距离（以米为单位）。",
+	["worldpins"] = "启用3D图钉",
+	["worldpinstooltip"] = "启用时，在3D游戏世界中显示附近的资源位置。可以禁用以提高性能。",
+	["worlddistance"] = "最大3D距离",
+	["worlddistancetooltip"] = "收获地点的最大距离（以米为单位）。当位置更远时，不显示3D图钉。",
+	["worldpinwidth"] = "3D图钉宽度",
+	["worldpinwidthtooltip"] = "3D图钉的宽度，以公分为单位。",
+	["worldpinheight"] = "3D图钉高度",
+	["worldpinheighttooltip"] = "3D图钉的高度，以公分为单位。",
+	["worldpinsdepth"] = "对3D图钉使用深度缓冲",
+	["worldpinsdepthtooltip"] = "禁用时，当3D图钉在其他对象后面，将不会隐藏。",
+	["worldpinsdepthwarning"] = "由于游戏的bug，当在游戏的视频选项中选择SubSampling质量为中等或低等时，此选项不起作用。",
+	
+	-- general pin options
+	["pinoptions"] = "一般图钉选项",
+	["extendedpinoptions"] = "通常在地图，罗盘和3D世界中的图钉都会同步。因此，如果你在地图上隐藏某种类型的资源，它也会删除罗盘和3D世界的图钉。但是，在扩展图钉过滤器的菜单中，你可以将罗盘和3D世界的图钉设置为独立于地图的图钉。",
+	["extendedpinoptionsbutton"] = "开启扩展图钉过滤器",
+	["override"] = "覆盖地图图钉过滤器",
+	["level"] = "在POI图钉上方显示地图图钉。",
+	["leveltooltip"] = "启用时，在地图上的POI图钉上方显示HarvestMap的图钉。",
+	["pinsize"] = "图钉大小",
+	["pinsizetooltip"] = "设置地图上的图钉的大小。",
+	["pinminsize"] = "最小地图图钉大小",
+	["pinminsizetooltip"] = "当缩小地图时，图钉也会变小。你可以使用此选项设置图钉尺寸的最小值。使用较小的数值以免地图被隐藏在图钉后面，但图钉可能变得更难以看到。",
+	["pincolor"] = "图钉颜色",
+	["pincolortooltip"] = "设置在地图和罗盘上的图钉的颜色。",
+	["savepin"] = "保存位置",
+	["savetooltip"] = "启用时，可以在发现时保存此资源的位置。",
+	["pintexture"] = "图钉图标",
+	
+	-- debug output setting
+	["debugoptions"] = "调试",
+	["debug"] = "显示调试讯息",
+	["debugtooltip"] = "启用时，在聊天中显示调试讯息。",
+	
+	-- pin type names
+	["pintype1"] = "锻造和珠宝",
+	["pintypetooltip1"] = "Display ore and dust on the map and compass.",
+	["pintype2"] = "纤维植物",
+	["pintypetooltip2"] = "Display clothing material on the map and compass.",
+	["pintype3"] = "Runestones和Psijic传送门",
+	["pintypetooltip3"] = "Display runestones and Psijic portals on the map and compass.",
+	["pintype4"] = "菇类",
+	["pintypetooltip4"] = "Display mushrooms on the map and compass.",
+	["pintype13"] = "草药/花",
+	["pintypetooltip13"] = "Display herbs and flowers on the map and compass.",
+	["pintype14"] = "Water herbs",
+	["pintypetooltip14"] = "Display water plants on the map and compass.",
+	["pintype5"] = "木材",
+	["pintypetooltip5"] = "Display wood on the map and compass.",
+	["pintype6"] = "箱子",
+	["pintypetooltip6"] = "Display chests on the map and compass.",
+	["pintype7"] = "溶剂",
+	["pintypetooltip7"] = "Display solvents on the map and compass.",
+	["pintype8"] = "钓点",
+	["pintypetooltip8"] = "Display fishing locations on the map and compass.",
+	["pintype9"] = "Heavy Sacks",
+	["pintypetooltip9"] = "Display heavy sacks on the map and compass.",
+	["pintype10"] = "Thieves Troves",
+	["pintypetooltip10"] = "Display Thieves Troves on the map and compass.",
+	["pintype11"] = "Justice Containers",
+	["pintypetooltip11"] = "Display Justice Containers like Safeboxes or Heist objectives on the map and compass.",
+	["pintype12"] = "Hidden Stashes",
+	["pintypetooltip12"] = "Display hidden stashes like 'Loose Panels' on the map and compass.",
+	["pintype15"] = "Giant Clams",
+	["pintypetooltip15"] = "Display giant clams on the map and compass.",
+
+	-- extra map filter buttons
+	["deletepinfilter"] = "删除HarvestMap图钉",
+	["filterheatmap"] = "热图模式",
+	
+	-- localization for the farming helper
+	["goldperminute"] = "Gold per minute:",
+	["farmresult"] = "HarvestFarm Result",
+	["farmnotour"] = "HarvestFarm was not able to calculate a good farming route with the given minimum route length.",
+	["farmerror"] = "HarvestFarm Error",
+	["farmnoresources"] = "No resources found.\nThere are no resources on this map or you don't have any resource types selected.",
+	["farminvalidmap"] = "The farming helper tool can not be used on this map.",
+	["farmsuccess"] = "HarvestFarm calculated a farming tour with <<1>> nodes per kilometer.\n\nClick on one of the tour's pins to set the tour's starting point.",
+	["farmdescription"] = "HarvestFarm will calculate a tour with a very high resource per time ratio.\nAfter generating a tour, click on one of the selected resources to set the tour's starting point.",
+	["farmminlength"] = "Minimum route length",
+	["farmminlengthtooltip"] = "The minimum length of the tour in kilometers.",
+	["farmminlengthdescription"] = "The longer the tour, the higher the chance that the resources have respawned when you start the next cycle.\nHowever a shorter tour will have a better resource per time ratio.",
+	["tourpin"] = "Next target of your tour",
+	["calculatetour"] = "Calculate Tour",
+	["showtourinterface"] = "Show Tour Interface",
+	["canceltour"] = "Cancel Tour",
+	["reverttour"] = "Revert Tour Direction",
+	["resourcetypes"] = "Resource Types",
+	["skiptarget"] = "Skip current target",
+	["removetarget"] = "Remove current target",
+	["nodesperminute"] = "Nodes per minute",
+	["distancetotarget"] = "Distance to the next resource",
+	["showarrow"] = "Display direction",
+	["removetour"] = "Remove Tour",
+	["undo"] = "Undo last change",
+	["tourname"] = "Tour name: ",
+	["defaultname"] = "Unnamed tour",
+	["savedtours"] = "Saved tours for this map:",
+	["notourformap"] = "There is no saved tour for this map.",
+	["load"] = "Load",
+	["delete"] = "Delete",
+	["saveexiststitle"] = "Please Confirm",
+	["saveexists"] = "There is already a tour with the name <<1>> for this map. Do you want to overwrite it?",
+	["savenotour"] = "There is no tour that could be saved.",
+	["loaderror"] = "The tour could not be loaded.",
+	["removepintype"] = "Do you want to remove <<1>> from the tour?",
+	["removepintypetitle"] = "Confirm Removal",
+	
+	-- extra harvestmap menu
+	["pinvisibilitymenu"] = "Extended Pin Filter Menu",
+	["menu"] = "HarvestMap Menu",
+	["farmmenu"] = "Farming Tour Editor",
+	["editordescription"] = [[In this menu, you can create and edit tours.
+If there is currently no other tour active, you can create a tour by clicking onto the map pins.
+If there is a tour active, you can edit the tour by replacing sub-sections:
+- First click on a pin of your (red) tour.
+- Then, click on the pins that you want to add to your tour. (A green tour will appear)
+- Finally, click on a pin of your red tour again.
+The green tour will now be inserted into the red tour.]],
+	["editorstats"] = [[Number of nodes: <<1>>
+Length: <<2>> m
+Nodes per kilometer: <<3>>]],
+	
+	-- SI names to fit with ZOS api
+	["SI_BINDING_NAME_SKIP_TARGET"] = "Skip Target",
+	["SI_BINDING_NAME_TOGGLE_WORLDPINS"] = "Toggle 3D pins",
+	["SI_BINDING_NAME_TOGGLE_MAPPINS"] = "Toggle map pins",
+	["SI_BINDING_NAME_HARVEST_SHOW_PANEL"] = "Toggle HarvestMap Pin Menu",
+	["SI_HARVEST_CTRLC"] = "Press CTRL+C to copy the text",
+	["HARVESTFARM_GENERATOR"] = "Generate new tour",
+	["HARVESTFARM_EDITOR"] = "Edit tour",
+	["HARVESTFARM_SAVE"] = "Save/Load tour",
+}
