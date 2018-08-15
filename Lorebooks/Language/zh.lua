@@ -80,10 +80,10 @@ SafeAddString(LBOOKS_PIN_TEXTURE_DESC,				"选择地图图钉图案。", 1)
 SafeAddString(LBOOKS_PIN_SIZE,						"图钉大小", 1)
 SafeAddString(LBOOKS_PIN_SIZE_DESC,					"设置地图图钉的大小。", 1)
 SafeAddString(LBOOKS_PIN_LAYER,						"图钉图层", 1)
-SafeAddString(LBOOKS_PIN_LAYER_DESC,				"设置地图图钉的图层", 1)
+SafeAddString(LBOOKS_PIN_LAYER_DESC,				"设置地图图钉的图层。", 1)
 
 --compass
-SafeAddString(LBOOKS_COMPASS_UNKNOWN,				"在罗盘上显示典籍。", 1)
+SafeAddString(LBOOKS_COMPASS_UNKNOWN,				"在罗盘上显示典籍", 1)
 SafeAddString(LBOOKS_COMPASS_UNKNOWN_DESC,			"在罗盘上显示/隐藏未知的典籍的图标。", 1)
 SafeAddString(LBOOKS_COMPASS_DIST,					"最大图钉距离", 1)
 SafeAddString(LBOOKS_COMPASS_DIST_DESC,				"图钉出现在罗盘上的最大距离。", 1)
@@ -95,7 +95,7 @@ SafeAddString(LBOOKS_COLLECTED,						"显示已收集的典籍", 1)
 SafeAddString(LBOOKS_COLLECTED_DESC,				"在地图上显示/隐藏已收集的典籍的图标。", 1)
 
 SafeAddString(LBOOKS_SHARE_DATA,					"与LoreBooks作者分享你的发现", 1)
-SafeAddString(LBOOKS_SHARE_DATA_DESC,				"启用此选项将會与LoreBooks作者共享你的發現，藉由使用游戏內置的邮件自动发送收集的数据。\n此选项仅适用于EU伺服器玩家，即使收集的数据与與NA伺服器共享。\n请注意，你的技能可能会遇到一些小延迟。每隔30本书就会默默地发送一次邮件。", 1)
+SafeAddString(LBOOKS_SHARE_DATA_DESC,				"启用此选项将會与LoreBooks作者共享你的發現，藉由使用游戏中的邮件系统自动发送收集的数据。\n此选项仅适用于EU伺服器玩家，即使收集的数据与與NA伺服器共享。\n请注意，你的技能可能会遇到一些小延迟。每隔30本书就会默默地发送一次邮件。", 1)
 
 SafeAddString(LBOOKS_EIDETIC,						"显示未知的永恒记忆", 1)
 SafeAddString(LBOOKS_EIDETIC_DESC,					"在地图上显示/隐藏未知的永恒记忆卷轴。那些卷轴是与传说相关的卷轴，是与法师公会进展無關的，只提供有关泰姆瑞爾的信息。", 1)
@@ -103,7 +103,7 @@ SafeAddString(LBOOKS_EIDETIC_COLLECTED,				"显示已知的永恒记忆", 1)
 SafeAddString(LBOOKS_EIDETIC_COLLECTED_DESC,		"在地图上显示/隐藏已知的永恒记忆卷轴。那些卷轴是与传说相关的卷轴，是与法师公会进展無關的，只提供有关泰姆瑞爾的信息。", 1)
 
 SafeAddString(LBOOKS_COMPASS_EIDETIC,				"在罗盘上显示未知的永恒记忆", 1)
-SafeAddString(LBOOKS_COMPASS_EIDETIC_DESC,			"在地图上显示/隐藏未知的永恒记忆卷轴。那些卷轴是与传说相关的卷轴，是与法师公会进展無關的，只提供有关泰姆瑞爾的信息。", 1)
+SafeAddString(LBOOKS_COMPASS_EIDETIC_DESC,			"在罗盘上显示/隐藏未知的永恒记忆卷轴。那些卷轴是与传说相关的卷轴，是与法师公会进展無關的，只提供有关泰姆瑞爾的信息。", 1)
 
 SafeAddString(LBOOKS_UNLOCK_EIDETIC,				"解锁永恒图书馆", 1)
 SafeAddString(LBOOKS_UNLOCK_EIDETIC_DESC,			"這會解鎖永恆圖書館，即使你沒有完成法師公會任务链。此选项仅对EN/FR/DE玩家有效。", 1)
@@ -166,4 +166,4 @@ SafeAddString(LBOOKS_IMMERSIVE_CHOICE5,				"区域任务", 1)
 
 -- Quest Books
 SafeAddString(LBOOKS_USE_QUEST_BOOKS,				"使用任务书（测试版）", 1)
-SafeAddString(LBOOKS_USE_QUEST_BOOKS_DESC,			"将在收到任务时尝试使用任务工具，以避免錯過仅限物品欄的书籍。也可能使用像地图之类的东西，因为书籍和其他可用的任务物品之间没有区别。", 1)
+SafeAddString(LBOOKS_USE_QUEST_BOOKS_DESC,			"将在收到任务时尝试使用任务工具，以避免錯過仅限物品欄的书籍。也會使用像地图之类的东西，因为书籍和其他可用的任务物品之间没有区别。", 1)
