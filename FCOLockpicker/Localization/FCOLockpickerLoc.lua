@@ -389,8 +389,8 @@ FCOLP.localizationVars.localizationAll = {
 		["options_language_description1"]		 = "警告：更改语言/保存选项将重新加载用户界面！",
 		["options_savedvariables"]				 = "保存设置",
 		["options_savedvariables_tooltip"]       = "为你帐户的所有角色保存插件设置，或为每个角色单独保存设置。",
-		["options_savedVariables_dropdown_selection1"] = "每个角色",
-		["options_savedVariables_dropdown_selection2"] = "账户范围",
+		["options_savedVariables_dropdown_selection1"] = "个别角色",
+		["options_savedVariables_dropdown_selection2"] = "帐户通用",
 		--Colors & values
 		["options_header_color"]				 = "颜色",
 		["options_normal_color"] 				 = "正常时颜色",
