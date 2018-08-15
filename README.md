@@ -3,7 +3,7 @@ Elder Scrolls Online addons chinese patch
 	
 Require:https://vstab.com/local/
 
-Has not started:\n
+Has not started:
   Destinations
   HarvestMap
 Work in progress:
