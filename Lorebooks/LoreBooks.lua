@@ -108,17 +108,17 @@ end
 
 -- Pins -----------------------------------------------------------------------
 local pinTexturesList = {
-	[1] = "Shalidor's Library icons",
-	[2] = "Book icon set 1",
-	[3] = "Book icon set 2",
-	[4] = "Esohead's icons (Rushmik)",
+	[1] = GetString(LBOOKS_PIN_TEXTURE_CHOICE1),
+	[2] = GetString(LBOOKS_PIN_TEXTURE_CHOICE2),
+	[3] = GetString(LBOOKS_PIN_TEXTURE_CHOICE3),
+	[4] = GetString(LBOOKS_PIN_TEXTURE_CHOICE4),
 }
 
 local pinTexturesListEidetic = {
-	[1] = "Eidetic Memory icons",
-	[2] = "Book icon set 1",
-	[3] = "Book icon set 2",
-	[4] = "Esohead's icons (Rushmik)",
+	[1] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE1),
+	[2] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE2),
+	[3] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE3),
+	[4] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE4),
 }
 
 local pinTextures = {
