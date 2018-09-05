@@ -339,11 +339,11 @@ local function CreateSettingsMenu()
 	}
 
 	local pinTexturesList = {
-		[1] = "Default icons (Garkin)",
-		[2] = "Alternative icons (Garkin)",
-		[3] = "Esohead's icons (Mitsarugi)",
-		[4] = "Glowing icons (Rushmik)",
-		[5] = "Realistic icons (Heidra)",
+		[1] = GetString(SKYS_PIN_TEXTURE_CHOICE1),
+		[2] = GetString(SKYS_PIN_TEXTURE_CHOICE2),
+		[3] = GetString(SKYS_PIN_TEXTURE_CHOICE3),
+		[4] = GetString(SKYS_PIN_TEXTURE_CHOICE4),
+		[5] = GetString(SKYS_PIN_TEXTURE_CHOICE5),
 	}
 
 	local panelData = {
