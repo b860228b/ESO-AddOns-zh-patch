@@ -1,6 +1,8 @@
 --[[
 -------------------------------------------------------------------------------
--- SkyShards, by Ayantir, AssemblerManiac
+-- SkyShards
+-- Current maintainer: AssemblerManiac
+-- Previous maintainer: Ayantir
 -- originally by Garkin
 -------------------------------------------------------------------------------
 This software is under : CreativeCommons CC BY-NC-SA 4.0
@@ -32,7 +34,7 @@ local GPS = LibStub("LibGPS2")
 
 --Local constants -------------------------------------------------------------
 local ADDON_NAME = "SkyShards"
-local ADDON_VERSION = "10.3"
+local ADDON_VERSION = "10.6"
 local ADDON_WEBSITE = "http://www.esoui.com/downloads/info128-SkyShards.html"
 local PINS_UNKNOWN = "SkySMapPin_unknown"
 local PINS_COLLECTED = "SkySMapPin_collected"
@@ -337,11 +339,11 @@ local function CreateSettingsMenu()
 	}
 
 	local pinTexturesList = {
-		[1] = GetString(SKYS_PIN_TEXTURE_CHOICE1),
-		[2] = GetString(SKYS_PIN_TEXTURE_CHOICE2),
-		[3] = GetString(SKYS_PIN_TEXTURE_CHOICE3),
-		[4] = GetString(SKYS_PIN_TEXTURE_CHOICE4),
-		[5] = GetString(SKYS_PIN_TEXTURE_CHOICE5),
+		[1] = "Default icons (Garkin)",
+		[2] = "Alternative icons (Garkin)",
+		[3] = "Esohead's icons (Mitsarugi)",
+		[4] = "Glowing icons (Rushmik)",
+		[5] = "Realistic icons (Heidra)",
 	}
 
 	local panelData = {
@@ -508,6 +510,7 @@ local function CreateSettingsMenu()
 					for index, name in ipairs(skillPanelChoices) do
 						if name == selected then
 							db.skillPanelDisplay = index
+							SKILLS_WINDOW:RefreshSkillPointInfo()
 							break
 						end
 					end
@@ -557,7 +560,11 @@ end
 
 local function AlterSkyShardsIndicator()
 
-	local function PreHookUpdateSkyShards(self)
+	local function PreHookRefreshSkillPointInfo(self)				-- keyboard function
+
+    	local availablePoints = SKILL_POINT_ALLOCATION_MANAGER:GetAvailableSkillPoints()
+    	self.availablePointsLabel:SetText(zo_strformat(SI_SKILLS_POINTS_TO_SPEND, availablePoints))
+
 		if db.skillPanelDisplay > 1 then
 			if collectedSkyShards < totalSkyShards then
 				if db.skillPanelDisplay == 2 then
@@ -575,7 +582,7 @@ local function AlterSkyShardsIndicator()
 		end
 	end
 
-	local function PreHookRefreshPointsDisplay(self)
+	local function PreHookRefreshPointsDisplay(self)		-- gamepad function
 
 		local availablePoints = GetAvailableSkillPoints()
 		self.headerData.data1Text = availablePoints
@@ -602,7 +609,7 @@ local function AlterSkyShardsIndicator()
 	end
 
 	GetNumSkySkyShards()
-	ZO_PreHook(SKILLS_WINDOW, "UpdateSkyShards", PreHookUpdateSkyShards)
+	ZO_PreHook(SKILLS_WINDOW, "RefreshSkillPointInfo", PreHookRefreshSkillPointInfo)
 	ZO_PreHook(GAMEPAD_SKILLS, "RefreshPointsDisplay", PreHookRefreshPointsDisplay)
 
 end

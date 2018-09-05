@@ -16,11 +16,6 @@ local strings = {
 	--appearance
 	SKYS_PIN_TEXTURE				= "Select map pin icons",
 	SKYS_PIN_TEXTURE_DESC		= "Select map pin icons.",
-	SKYS_PIN_TEXTURE_CHOICE1	= "Default icons (Garkin)",
-	SKYS_PIN_TEXTURE_CHOICE2	= "Alternative icons (Garkin)",
-	SKYS_PIN_TEXTURE_CHOICE3	= "Esohead's icons (Mitsarugi)",
-	SKYS_PIN_TEXTURE_CHOICE4	= "Glowing icons (Rushmik)",
-	SKYS_PIN_TEXTURE_CHOICE5	= "Realistic icons (Heidra)",
 	SKYS_PIN_SIZE					= "Pin size",
 	SKYS_PIN_SIZE_DESC			= "Set the size of the map pins.",
 	SKYS_PIN_LAYER					= "Pin layer",
