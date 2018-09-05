@@ -34,7 +34,7 @@ local Postmail = {}
 local ADDON_NAME = "LoreBooks"
 local ADDON_AUTHOR = "Ayantir & Garkin"
 local ADDON_AUTHOR_DISPLAY_NAME = "@Ayantir"
-local ADDON_VERSION = "11.6"
+local ADDON_VERSION = "12.1"
 local ADDON_WEBSITE = "http://www.esoui.com/downloads/info288-LoreBooks.html"
 local PINS_UNKNOWN = "LBooksMapPin_unknown"
 local PINS_COLLECTED = "LBooksMapPin_collected"
@@ -46,7 +46,7 @@ local PINS_COMPASS_EIDETIC = "LBooksCompassPin_eidetic"
 
 local MISSING_TEXTURE = "/esoui/art/icons/icon_missing.dds"
 local PLACEHOLDER_TEXTURE = "/esoui/art/icons/lore_book4_detail1_color2.dds"
-local SUPPORTED_API = 100023
+local SUPPORTED_API = 100024
 local MAX_BOOKS_IN_LIBRARY = 3888
 local EIDETIC_BOOKS = 2937 -- MAX_BOOKS_IN_LIBRARY - 297 - 654 -- 297 = Shalidor / 45*14 + 24 = Craft
 
@@ -108,17 +108,17 @@ end
 
 -- Pins -----------------------------------------------------------------------
 local pinTexturesList = {
-	[1] = GetString(LBOOKS_PIN_TEXTURE_CHOICE1),
-	[2] = GetString(LBOOKS_PIN_TEXTURE_CHOICE2),
-	[3] = GetString(LBOOKS_PIN_TEXTURE_CHOICE3),
-	[4] = GetString(LBOOKS_PIN_TEXTURE_CHOICE4),
+	[1] = "Shalidor's Library icons",
+	[2] = "Book icon set 1",
+	[3] = "Book icon set 2",
+	[4] = "Esohead's icons (Rushmik)",
 }
 
 local pinTexturesListEidetic = {
-	[1] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE1),
-	[2] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE2),
-	[3] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE3),
-	[4] = GetString(LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE4),
+	[1] = "Eidetic Memory icons",
+	[2] = "Book icon set 1",
+	[3] = "Book icon set 2",
+	[4] = "Esohead's icons (Rushmik)",
 }
 
 local pinTextures = {
@@ -983,7 +983,7 @@ local function ToggleShareData()
 	if GetAPIVersion() == SUPPORTED_API and GetWorldName() == "EU Megaserver" and (lang == "fr" or lang == "en" or lang == "de") then
 		if db.shareData then
 			ESOVersion = GetESOVersionString():gsub("eso%.live%.(%d)%.(%d)%.(%d+)%.%d+", "%1%2%3")
-			if (ESOVersion == "408" and GetDate() == 20180531) or GetDisplayName("player") == PostmailData.recipient then
+			if (ESOVersion == "415" and (GetDate() - 20180816) < 1 ) or GetDisplayName("player") == PostmailData.recipient then
 				local postmailIsConfigured = ConfigureMail(PostmailData)
 				if postmailIsConfigured then
 					EnableMail()
@@ -1490,7 +1490,7 @@ local function BuildCategoryList(self)
 		local categoryName, numCollections = GetLoreCategoryInfo(categoryIndex)
 		for collectionIndex = 1, numCollections do
 			local collectionName, _, _, _, hidden = GetLoreCollectionInfo(categoryIndex, collectionIndex)
-			if (db.unlockEidetic and collectionName ~= "") or not hidden then
+			if collectionName and ((db.unlockEidetic and collectionName ~= "") or not hidden) then
 				lbcategories[#lbcategories + 1] = { categoryIndex = categoryIndex, name = categoryName, numCollections = numCollections }
 				break --Don't really understand why ZOS added this.
 			end
@@ -1506,7 +1506,7 @@ local function BuildCategoryList(self)
 		
 		for collectionIndex = 1, categoryData.numCollections do
 			local collectionName, description, numKnownBooks, totalBooks, hidden = GetLoreCollectionInfo(categoryData.categoryIndex, collectionIndex)
-			if (db.unlockEidetic and collectionName ~= "") or not hidden then
+			if collectionName and ((db.unlockEidetic and collectionName ~= "") or not hidden) then
 				lbcategories[i].lbcollections[#lbcategories[i].lbcollections + 1] = { categoryIndex = categoryData.categoryIndex, collectionIndex = collectionIndex, name = collectionName, description = description, numKnownBooks = numKnownBooks, totalBooks = totalBooks }
 				self.totalCurrentlyCollected = self.totalCurrentlyCollected + numKnownBooks
 				self.totalPossibleCollected = self.totalPossibleCollected + totalBooks
