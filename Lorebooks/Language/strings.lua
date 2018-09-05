@@ -72,16 +72,8 @@ local strings = {
 
    --appearance
    LBOOKS_PIN_TEXTURE            = "Select map pin icons",
-   LBOOKS_PIN_TEXTURE_EIDETIC    = "Select map pin icons (<<1>>)",
+	LBOOKS_PIN_TEXTURE_EIDETIC		= "Select map pin icons (<<1>>)",
    LBOOKS_PIN_TEXTURE_DESC       = "Select map pin icons.",
-   LBOOKS_PIN_TEXTURE_CHOICE1    = "Shalidor's Library icons",
-   LBOOKS_PIN_TEXTURE_CHOICE2    = "Book icon set 1",
-   LBOOKS_PIN_TEXTURE_CHOICE3    = "Book icon set 2",
-   LBOOKS_PIN_TEXTURE_CHOICE4    = "Esohead's icons (Rushmik)",
-   LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE1 = "Shalidor's Library icons",
-   LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE2 = "Book icon set 1",
-   LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE3 = "Book icon set 2",
-   LBOOKS_PIN_TEXTURE_EIDETIC_CHOICE4 = "Esohead's icons (Rushmik)",
    LBOOKS_PIN_SIZE               = "Pin size",
    LBOOKS_PIN_SIZE_DESC          = "Set the size of the map pins.",
    LBOOKS_PIN_LAYER              = "Pin layer",
