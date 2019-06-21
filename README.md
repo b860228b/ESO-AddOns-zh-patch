@@ -6,7 +6,7 @@ Require:https://vstab.com/local/
 Work in progress:
   LostTreasure(5.04)
   HarvestMap(3.11.4)
-  Destinations(3.0.0)
+  Destinations(3.1.2)
   
 Done:
   FCOLockpicker(0.1)
