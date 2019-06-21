@@ -32,9 +32,9 @@ local Postmail = {}
 
 --Local constants -------------------------------------------------------------
 local ADDON_NAME = "LoreBooks"
-local ADDON_AUTHOR = "Ayantir & Garkin"
+local ADDON_AUTHOR = "Ayantir, Garkin & Kyoma"
 local ADDON_AUTHOR_DISPLAY_NAME = "@Ayantir"
-local ADDON_VERSION = "12.1"
+local ADDON_VERSION = "15.4"
 local ADDON_WEBSITE = "http://www.esoui.com/downloads/info288-LoreBooks.html"
 local PINS_UNKNOWN = "LBooksMapPin_unknown"
 local PINS_COLLECTED = "LBooksMapPin_collected"
@@ -46,9 +46,17 @@ local PINS_COMPASS_EIDETIC = "LBooksCompassPin_eidetic"
 
 local MISSING_TEXTURE = "/esoui/art/icons/icon_missing.dds"
 local PLACEHOLDER_TEXTURE = "/esoui/art/icons/lore_book4_detail1_color2.dds"
-local SUPPORTED_API = 100024
-local MAX_BOOKS_IN_LIBRARY = 3888
-local EIDETIC_BOOKS = 2937 -- MAX_BOOKS_IN_LIBRARY - 297 - 654 -- 297 = Shalidor / 45*14 + 24 = Craft
+local SUPPORTED_API = 100027
+local EIDETIC_BOOKS = 3229
+--[[
+/script local t, _, n = 0, GetLoreCategoryInfo(3)
+for i = 1, n do
+	local _, _, _, totalBooks, h = GetLoreCollectionInfo(3, i)
+	if not h then t = t + totalBooks end
+end
+d(t)
+--]]
+
 
 --Local variables -------------------------------------------------------------
 local lang = GetCVar("Language.2")
@@ -93,7 +101,6 @@ local loreLibraryReportKeybind
 local eideticModeAsked
 local reportShown
 local copyReport
-local ESOVersion
 
 local THREESHOLD_EIDETIC = 225 -- If you crash at startup, you may lower this value.
 
@@ -190,6 +197,10 @@ pinTooltipCreator.creator = function(pin)
 	
 end
 
+local function getQuestName(q)
+	return LoreBooks_GetQuestName(q, lang)
+end
+
 --tooltip creator
 local pinTooltipCreatorEidetic = {}
 pinTooltipCreatorEidetic.tooltip = 1 --TOOLTIP_MODE.INFORMATION
@@ -211,18 +222,18 @@ pinTooltipCreatorEidetic.creator = function(pin)
 		INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, bookColor:Colorize(title), {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_3})
 		
 		if pinTag.q then
-			if type(pinTag.q) == "table" then
+			local qName = getQuestName(pinTag.q)
+			if qName then
 				INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, GetString(LBOOKS_QUEST_BOOK), {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_2})
-				INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, pinTag.q[lang] or pinTag.q["en"], {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_2})
+				INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, qName, {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_2})
 				
-				local questDetails
-				if pinTag.qt then
-					questDetails = zo_strformat(GetString("LBOOKS_SPECIAL_QUEST"), pinTag.qt)
-				else
-					questDetails = zo_strformat(GetString(LBOOKS_QUEST_IN_ZONE), zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(pinTag.qm)))
-				end
-				
-				INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, questDetails, {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_2})
+				--local questDetails
+				--if pinTag.qt then
+				--	questDetails = zo_strformat(GetString("LBOOKS_SPECIAL_QUEST"), pinTag.qt)
+				--else
+				--	questDetails = zo_strformat(GetString(LBOOKS_QUEST_IN_ZONE), zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(pinTag.qm)))
+				--end
+				--INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, questDetails, {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_2})
 			end
 		end
 		
@@ -256,21 +267,23 @@ pinTooltipCreatorEidetic.creator = function(pin)
 		INFORMATION_TOOLTIP:AddLine(zo_iconTextFormat(icon, 32, 32, title), "", bookColor:UnpackRGB())
 		
 		if pinTag.q then
-			if type(pinTag.q) == "table" then
+			local qName = getQuestName(pinTag.q)
+			if qName then
 				INFORMATION_TOOLTIP:AddLine(GetString(LBOOKS_QUEST_BOOK), "", ZO_SELECTED_TEXT:UnpackRGB())
-				INFORMATION_TOOLTIP:AddLine(string.format("[%s]", pinTag.q[lang] or pinTag.q["en"]), "", ZO_SELECTED_TEXT:UnpackRGB())
+				INFORMATION_TOOLTIP:AddLine(string.format("[%s]", qName), "", ZO_SELECTED_TEXT:UnpackRGB())
 				
-				local questDetails
-				if pinTag.qt then
-					questDetails = zo_strformat(GetString("LBOOKS_SPECIAL_QUEST"), pinTag.qt)
-				else
-					questDetails = zo_strformat(GetString(LBOOKS_QUEST_IN_ZONE), zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(pinTag.qm)))
-				end
-				
-				INFORMATION_TOOLTIP:AddLine(questDetails, "", ZO_HIGHLIGHT_TEXT:UnpackRGB())
+				--local questDetails
+				--if pinTag.qt then
+				--	questDetails = zo_strformat(GetString("LBOOKS_SPECIAL_QUEST"), pinTag.qt)
+				--elseif pinTag.qm then
+				--	questDetails = zo_strformat(GetString(LBOOKS_QUEST_IN_ZONE), zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(pinTag.qm)))
+				--end
+				--if questDetails then
+				--	INFORMATION_TOOLTIP:AddLine(questDetails, "", ZO_HIGHLIGHT_TEXT:UnpackRGB())
+				--end
 			end
 		end
-		
+
 		if pinTag.d then
 		
 			local zoneId = pinTag.z
@@ -492,7 +505,7 @@ local function CreatePins()
 								end
 							end
 							if not known then
-								if updatePins[PINS_COMPASS_EIDETIC] and db.filters[PINS_COMPASS_EIDETIC] and ((mapContentType == MAP_CONTENT_DUNGEON and pinData.d) or (mapContentType ~= MAP_CONTENT_DUNGEON and pinData.d == false)) then
+								if updatePins[PINS_COMPASS_EIDETIC] and db.filters[PINS_COMPASS_EIDETIC] and ((mapContentType == MAP_CONTENT_DUNGEON and pinData.d) or (mapContentType ~= MAP_CONTENT_DUNGEON and not pinData.d)) then
 									COMPASS_PINS.pinManager:CreatePin(PINS_COMPASS_EIDETIC, pinData, pinData.xLoc, pinData.yLoc)
 								end
 							end
@@ -627,70 +640,12 @@ local function ShowMyPosition()
 	local locY = ("%05.02f"):format(zo_round(y*10000)/100)
 
 	MyPrint(zo_strformat("<<1>>: <<2>>\195\151<<3>> (<<4>>)", GetMapName(), locX, locY, LMP:GetZoneAndSubzone(true)))
+	
+	local globX, globY, mapI = GPS:LocalToGlobal(x, y)
 end
 
-SLASH_COMMANDS["/mypos"] = ShowMyPosition
+SLASH_COMMANDS["/mypos"] = ShowMyPosition 
 SLASH_COMMANDS["/myloc"] = ShowMyPosition
-
-local function Base62(value)
-	local r = false
-	local state = type( value )
-	if state == "number" then
-		local k = math.floor( value )
-		if k == value and value > 0 then
-			local m
-			r = ""
-			while k > 0 do
-				m = k % 62
-				k = ( k - m ) / 62
-				if m >= 36 then
-					m = m + 61
-				elseif m >= 10 then
-					m = m + 55
-				else
-					m = m + 48
-				end
-				r = string.char( m ) .. r
-			end
-		elseif value == 0 then
-			r = "0"
-		end
-	elseif state == "string" then
-		if value:match( "^%w+$" ) then
-			local n = #value
-			local k = 1
-			local c
-			r = 0
-			for i = n, 1, -1 do
-				c = value:byte( i, i )
-				if c >= 48 and c <= 57 then
-					c = c - 48
-				elseif c >= 65 and c <= 90 then
-					c = c - 55
-				elseif c >= 97 and c <= 122 then
-					c = c - 61
-				else  -- How comes?
-					r = nil
-					break  -- for i
-				end
-				r = r + c * k
-				k = k * 62
-			end -- for i
-		end
-	end
-	return r
-end
-
--- Dirty trick
-local function UnsignedBase62(value)
-	if not value or value == "" or value == 0 then
-		return "" --compression optimization
-	end
-	local isNegative = value < 0
-	local value62 = Base62(math.abs(value))
-	if isNegative then return "-" .. value62 end
-	return value62
-end
 
 local function ConfigureMail(data)
 
@@ -804,167 +759,20 @@ local function BuildLorebooksLoreLibrary()
 	
 end
 
--- Returns false if Book should not be datamined.
-local function EideticValidEntry(categoryIndex)
-	if categoryIndex and (categoryIndex == 1 or categoryIndex == 3) then
-		return true
+local minerEnabled = false
+local minerCallback = function() end --overwritten if miner is enabled
+function LoreBooks_ReportBook(bookId)
+	local dataToShare = minerCallback(bookId)
+	if dataToShare then
+		SendData(dataToShare)
 	end
 end
 
-local function CoordsNearby(locX, locY, x, y)
-
-	local nearbyIs = 0.0005 --It should be 0.00028, but we add a large diff just in case of. 0.0004 is not enough.
-	if math.abs(locX - x) < nearbyIs and math.abs(locY - y) < nearbyIs then
-		return true
-	end
-	return false
-	
-end
-
-function BuildDataToShare(bookId)
-	
-	if bookId then
-		
-		local dataToShare
-		
-		if SetMapToPlayerLocation() == SET_MAP_RESULT_MAP_CHANGED then
-			CALLBACK_MANAGER:FireCallbacks("OnWorldMapChanged")
-		end
-		
-		local dontDatamine = {
-			--[4575] = true, 
-		}
-		
-		if dontDatamine[bookId] then
-			return
-		end
-		
-		if GetCurrentZoneHouseId() ~= 0 then
-			return -- You can now read books in houses
-		end
-		
-		-- Will only returns the zone and not the subzone
-		local zoneIndex = GetUnitZoneIndex("player")
-		local zoneId = GetZoneId(zoneIndex)
-		
-		-- mapType of the subzone. Needed when we are elsewhere than zone or subzone.
-		local mapContentType = GetMapContentType()
-		
-		local xGPS, yGPS, mapIndexGPS = GPS:LocalToGlobal(GetMapPlayerPosition("player"))
-		
-		if mapIndexGPS == 1 and zoneId == 0 then
-			return
-		end
-		
-		if not mapIndexGPS then
-			mapIndexGPS = 0
-		end
-		
-		local locX = zo_round(xGPS*100000) -- 5 decimals because of Cyrodiil map
-		local locY = zo_round(yGPS*100000)
-		
-		-- v1		= 2.4.0	LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapType, lastInteractionActionWas
-		-- v2		= 2.4.2	LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapContentType, mapIndex, lastInteractionActionWas
-		-- v3		= 2.4.4	LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapContentType, mapIndex, lastInteractionActionWas, langCode
-		-- v4		= 2.4.5	LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapContentType, mapIndex, lastInteractionActionWas, langCode, apiVersion
-		-- v5		= 2.5		LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapContentType, mapIndex, lastInteractionActionWas, langCode, apiVersion, currentZoneDungeonDifficulty
-		-- v6		= 2.5.1	LOC_DATA_UPDATE	= locX, locY, zoneIndex, mapContentType, mapIndex, lastInteractionActionWas, langCode, apiVersion, currentZoneDungeonDifficulty, reticleAway, associatedQuest
-		-- v7		= 4		BOOK_DATA_UPDATE	= categoryIndex, collectionIndex, bookIndex, mediumIndex
-		-- v8		= 5		LOC_DATA_UPDATE	= locX, locY, zoneId, mapContentType, mapIndex, lastInteractionActionWas, langCode, ESOVersion, interactionType, associatedQuest
-		-- v9		= 5.1		LOC_DATA_UPDATE	= locX, locY, zoneId, mapContentType, mapIndex, lastInteractionActionWas, langCode, LorebooksVersion, ESOVersion, interactionType, associatedQuest
-		-- v10	= 5.3		DAT_UPDATE			= Added collection 52.
-		-- v11	= 5.4		BOOK_DATA_UPDATE	= categoryIndex, collectionIndex, bookIndex, mediumIndex, bookId
-		-- v12	= 5.4		BOOK_DATA_UPDATE	= locX, locY, zoneId, mapContentType, mapIndex, isObject, langCode, LorebooksVersion, ESOVersion, interactionType, associatedQuest
-		-- v13	= 6		BOOK_DATA_UPDATE	= bookId
-		dataToShare = UnsignedBase62(locX) .. ";" .. UnsignedBase62(locY) .. ";" .. UnsignedBase62(zoneId) .. ";" .. UnsignedBase62(mapContentType) .. ";" .. UnsignedBase62(mapIndexGPS)
-		
-		local isObject = IsPlayerInteractingWithObject()
-		if isObject then
-			dataToShare = dataToShare ..";" -- means 0
-		else
-			dataToShare = dataToShare ..";1"
-            -- dont return here because we want quest info
-			--return -- Bookshelve & others 
-		end
-		
-		local clang
-		if lang == "en" then clang = 1 end
-		if lang == "fr" then clang = 2 end
-		if lang == "de" then clang = 3 end
-		
-		local MINER_VERSION = 15
-		dataToShare = dataToShare ..";" .. clang .. ";" .. UnsignedBase62(MINER_VERSION) ..";" .. UnsignedBase62(tonumber(ESOVersion))
-		
-		local categoryIndex, collectionIndex, bookIndex = GetLoreBookIndicesFromBookId(bookId)
-		
-		local bookName = GetLoreBookInfo(categoryIndex, collectionIndex, bookIndex)
-		
-		local associatedQuest = ""
-		local interactionType = GetInteractionType() -- If user runs an addon which break interaction, the result will return INTERACTION_NONE even if he was reading a book.
-		if interactionType == INTERACTION_NONE then --book read from inventory or case above.
-			for questIndex, questData in pairs(SHARED_INVENTORY.questCache) do
-				for itemIndex, itemData in pairs(questData) do
-					if string.lower(itemData.name) == string.lower(bookName) then
-						associatedQuest = GetJournalQuestInfo(questIndex)
-                        isObject = true -- so we don't skip this 
-                        --d(associatedQuest)
-						break
-					end
-				end
-			end
-		end
-        --df("Book [%d] |H1:book:%d|h|h - %s", bookId, bookId, associatedQuest)
-
-		dataToShare = dataToShare .. ";" .. UnsignedBase62(interactionType) .. ";" .. associatedQuest
-		
-		if EideticValidEntry(categoryIndex) then
-			
-			local bookData = LoreBooks_GetNewEideticDataFromBookId(bookId)
-			
-			if bookData and bookData.c and bookData.e then
-                if not isObject and (not bookData.r or (bookData.r and bookData.m[mapIndexGPS])) then
-					return -- Found a random book and this book is already tagged as random for the same map or got a static position
-                elseif associatedQuest ~= "" and not bookData.q then
-                    -- we always want the quest data right now for books that don't have any yet
-				else
-					for _, data in ipairs(bookData.e) do
-						if data.r == false then
-							if interactionType == INTERACTION_NONE then
-								return -- User read book from inventory but we already found pin from a static position
-							elseif CoordsNearby(xGPS, yGPS, data.x, data.y) then
-								if data.d then
-									if data.z == zoneId then
-                                        -- d("Pin already found")
-										return
-									end
-								else
-                                    --d("Pin already found")
-									return -- Pin already found
-								end
-							end
-						end
-					end
-				end
-			end
-			
-			dataToShare = dataToShare .. "@" .. bookId
-			
-		else
-			return -- We don't collect anymore books from users which didn't yet unlocked Eidetic Memory
-		end
-		
-		return dataToShare
-		
-	end
-		
-end
-
-local minerDisabled = true
-local lastReadBook 
+local lastReadBook = "" -- used by quest tool code
 local function OnShowBook(_, bookTitle, body, medium, showTitle, bookId) 
     lastReadBook = bookTitle
-    if not minerDisabled and db.shareData then 
-        local dataToShare = BuildDataToShare(bookId)
+    if minerEnabled and db.shareData then 
+        local dataToShare = minerCallback(bookId)
         if dataToShare then
             SendData(dataToShare)
         end
@@ -976,98 +784,27 @@ local function ToggleShareData()
 	local PostmailData = {
 		subject = "CM_DATA", -- Subject of the mail
 		recipient = "@Kyoma", -- Recipient of the mail. The recipient *IS GREATLY ENCOURAGED* to run CollabMiner
-		maxDelay = 7200, -- 24h
+		maxDelay = 3600*12, -- 12h
 		mailMaxSize = MAIL_MAX_BODY_CHARACTERS - 25, -- Mail limitation is 700 Avoid > 675. (some books with additional data can have 14 additional chars, so we'll still have 16 in case of).
 	}
 
-	if GetAPIVersion() == SUPPORTED_API and GetWorldName() == "EU Megaserver" and (lang == "fr" or lang == "en" or lang == "de") then
-		if db.shareData then
-			ESOVersion = GetESOVersionString():gsub("eso%.live%.(%d)%.(%d)%.(%d+)%.%d+", "%1%2%3")
-			if (ESOVersion == "415" and (GetDate() - 20180816) < 1 ) or GetDisplayName("player") == PostmailData.recipient then
-				local postmailIsConfigured = ConfigureMail(PostmailData)
-				if postmailIsConfigured then
-					EnableMail()
-                    minerDisabled = false
-				end
-			end
+	minerEnabled, minerCallback = LoreBooks_IsMinerEnabled()
+
+	if db.shareData and minerEnabled and minerCallback then
+		local postmailIsConfigured = ConfigureMail(PostmailData)
+		if postmailIsConfigured then
+			EnableMail()
 		else
+			-- shouldn't really happen
+			minerEnabled = false
 			DisableMail()
 		end
+	else
+		minerEnabled = false
 	end
-	
+
 end
 
-local function ShowCongrats(newBook)
-	
-	local congrats = {
-		[2500] = "/esoui/art/icons/quest_book_003.dds",
-		[3000] = "/esoui/art/icons/scroll_001.dds",
-		[3100] = "/esoui/art/icons/scroll_005.dds",
-		[3200] = "/esoui/art/icons/quest_book_001.dds",
-		[3300] = "/esoui/art/icons/lore_book2_detail1_color1.dds",
-		[3350] = "/esoui/art/icons/achievement_thievesguild_024.dds",
-		[3400] = "/esoui/art/icons/achievement_wrothgar_027.dds",
-		[3450] = "/esoui/art/icons/achievement_newlifefestival_011.dds",
-		[3500] = "/esoui/art/icons/achievement_newlifefestival_011.dds",
-		[3550] = "/esoui/art/icons/achievement_newlifefestival_011.dds",
-		[3600] = "/esoui/art/icons/achievement_newlifefestival_011.dds",
-		[MAX_BOOKS_IN_LIBRARY] = "/esoui/art/icons/ability_mage_064.dds", -- Max U16
-	}
-	
-	local function CongratsStuff(collected)
-		if not db.booksCollected[collected] then
-			db.booksCollected[collected] = true
-			CENTER_SCREEN_ANNOUNCE:AddMessage(0, CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP, GetString("LBOOKS_THANK_YOU", collected), GetString("LBOOKS_THANK_YOU_LONG", collected), congrats[collected], "EsoUI/Art/Achievements/achievements_iconBG.dds", nil, nil, 3000)
-		end
-	end
-	
-	if newBook then
-		
-		if congrats[totalCurrentlyCollected] then
-			if (totalCurrentlyCollected == MAX_BOOKS_IN_LIBRARY and GetAPIVersion() == SUPPORTED_API) then
-				CongratsStuff(totalCurrentlyCollected)
-			elseif totalCurrentlyCollected ~= MAX_BOOKS_IN_LIBRARY then
-				CongratsStuff(totalCurrentlyCollected)
-			end
-		end
-		
-		if EIDETIC_BOOKS == eideticCurrentlyCollected then
-			CENTER_SCREEN_ANNOUNCE:AddMessage(0, CSA_CATEGORY_LARGE_TEXT, SOUNDS.LEVEL_UP, GetString("LBOOKS_THANK_YOU", MAX_BOOKS_IN_LIBRARY), GetString("LBOOKS_THANK_YOU_LONG", MAX_BOOKS_IN_LIBRARY), congrats[MAX_BOOKS_IN_LIBRARY], "EsoUI/Art/Achievements/achievements_iconBG.dds", nil, nil, 3000)
-		end
-		
-	else
-	
-		-- If first activation
-		EVENT_MANAGER:UnregisterForEvent(ADDON_NAME, EVENT_PLAYER_ACTIVATED)
-		
-		-- It won't show all achiev in a row, I prefer like this.
-		if totalCurrentlyCollected == MAX_BOOKS_IN_LIBRARY and GetAPIVersion() == SUPPORTED_API then
-			CongratsStuff(MAX_BOOKS_IN_LIBRARY)
-		elseif totalCurrentlyCollected >= 3600 then
-			CongratsStuff(3600)
-		elseif totalCurrentlyCollected >= 3550 then
-			CongratsStuff(3550)
-		elseif totalCurrentlyCollected >= 3500 then
-			CongratsStuff(3500)
-		elseif totalCurrentlyCollected >= 3450 then
-			CongratsStuff(3450)
-		elseif totalCurrentlyCollected >= 3400 then
-			CongratsStuff(3400)
-		elseif totalCurrentlyCollected >= 3350 then
-			CongratsStuff(3350)
-		elseif totalCurrentlyCollected >= 3300 then
-			CongratsStuff(3300)
-		elseif totalCurrentlyCollected >= 3200 then
-			CongratsStuff(3200)
-		elseif totalCurrentlyCollected >= 3000 then
-			CongratsStuff(3000)
-		elseif totalCurrentlyCollected >= 2500 then
-			CongratsStuff(2500)
-		end
-		
-	end
-	
-end
 
 local function OnGamepadPreferredModeChanged()
 	if IsInGamepadPreferredMode() then
@@ -1594,11 +1331,11 @@ local function OnRowMouseUp(control, button)
 		--self:LockSelection()
 		
 		if control.known then
-			AddMenuItem(GetString(SI_LORE_LIBRARY_READ), function() ZO_LoreLibrary_ReadBook(control.categoryIndex, control.collectionIndex, control.bookIndex) end)
+			AddCustomMenuItem(GetString(SI_LORE_LIBRARY_READ), function() ZO_LoreLibrary_ReadBook(control.categoryIndex, control.collectionIndex, control.bookIndex) end)
 		end
 		
 		if IsChatSystemAvailableForCurrentPlatform() then
-			AddMenuItem(GetString(SI_ITEM_ACTION_LINK_TO_CHAT), function()
+			AddCustomMenuItem(GetString(SI_ITEM_ACTION_LINK_TO_CHAT), function()
 				local link = ZO_LinkHandler_CreateChatLink(GetLoreBookLink, control.categoryIndex, control.collectionIndex, control.bookIndex)
 				ZO_LinkHandler_InsertLink(link) 
 			end)
@@ -1611,7 +1348,7 @@ local function OnRowMouseUp(control, button)
 				local mapIndex = LoreBooks_GetMapIndexFromMapTile(resultData.zoneName, resultData.subZoneName)
 				
 				if mapIndex then
-					AddMenuItem(zo_strformat("<<1>> : <<2>>x<<3>>", zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(mapIndex)), (resultData.locX * 100), (resultData.locY * 100)),
+					AddCustomMenuItem(zo_strformat("<<1>> : <<2>>x<<3>>", zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(mapIndex)), (resultData.locX * 100), (resultData.locY * 100)),
 					function()
 						
 						ZO_WorldMap_SetMapByIndex(mapIndex)
@@ -1645,7 +1382,7 @@ local function OnRowMouseUp(control, button)
 					
 						local xTooltip = ("%0.02f"):format(zo_round(data.zx*10000)/100)
 						local yTooltip = ("%0.02f"):format(zo_round(data.zy*10000)/100)
-						AddMenuItem(zo_strformat("<<1>> (<<2>>x<<3>>)", zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(data.m)), xTooltip, yTooltip),
+						AddCustomMenuItem(zo_strformat("<<1>> (<<2>>x<<3>>)", zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(data.m)), xTooltip, yTooltip),
 						function()
 							
 							ZO_WorldMap_SetMapByIndex(data.m)
@@ -1684,7 +1421,7 @@ local function OnMouseEnter(self, categoryIndex, collectionIndex, bookIndex)
 
 	-- No 1 for now.
 	if categoryIndex == 3 and not mapIsShowing then
-	
+
 		local bookData = LoreBooks_GetNewEideticData(categoryIndex, collectionIndex, bookIndex)
 
 		if bookData and bookData.c then
@@ -1695,21 +1432,21 @@ local function OnMouseEnter(self, categoryIndex, collectionIndex, bookIndex)
 			
 			local addDivider
 			local entryWeight = {}
-			
-			if bookData.q and type(bookData.q) == "table" then
+			if bookData.q then
+				local qName = getQuestName(bookData.q)
 				InformationTooltip:AddLine(GetString(LBOOKS_QUEST_BOOK), "", ZO_HIGHLIGHT_TEXT:UnpackRGB())
-				InformationTooltip:AddLine(string.format("[%s]", bookData.q[lang] or bookData.q["en"]), "", ZO_SELECTED_TEXT:UnpackRGB())
+				InformationTooltip:AddLine(string.format("[%s]", qName), "", ZO_SELECTED_TEXT:UnpackRGB())
 
 				local questDetails
 				if bookData.qt then
 					questDetails = zo_strformat(GetString("LBOOKS_SPECIAL_QUEST"), bookData.qt)
-				else
+				elseif bookData.qm then
 					questDetails = zo_strformat(GetString(LBOOKS_QUEST_IN_ZONE), zo_strformat(SI_WINDOW_TITLE_WORLD_MAP, GetMapNameByIndex(bookData.qm)))
 				end
-
+                
 				InformationTooltip:AddLine(questDetails)
 				
-			elseif bookData.r and NonContiguousCount(bookData.m) > 1 then
+			elseif bookData.r and bookData.m and NonContiguousCount(bookData.m) > 1 then
 				
 				InformationTooltip:AddLine(GetString(LBOOKS_RANDOM_POSITION), "", ZO_HIGHLIGHT_TEXT:UnpackRGB())
 				ZO_Tooltip_AddDivider(InformationTooltip)
@@ -1788,9 +1525,10 @@ local function OnMouseEnter(self, categoryIndex, collectionIndex, bookIndex)
 			InformationTooltip:AddLine(bookName, "ZoFontGameOutline", ZO_SELECTED_TEXT:UnpackRGB())
 			ZO_Tooltip_AddDivider(InformationTooltip)
 			
-			if bookData.q and type(bookData.q) == "table" then
+			if bookData.q then
+				local qName = getQuestName(bookData.q)
 				InformationTooltip:AddLine(GetString(LBOOKS_QUEST_BOOK), "", ZO_HIGHLIGHT_TEXT:UnpackRGB())
-				InformationTooltip:AddLine(string.format("[%s]", bookData.q[lang] or bookData.q["en"]), "", ZO_SELECTED_TEXT:UnpackRGB())
+				InformationTooltip:AddLine(string.format("[%s]", qName), "", ZO_SELECTED_TEXT:UnpackRGB())
 				
 				local questDetails
 				if bookData.qt then
@@ -1819,11 +1557,16 @@ local function OnMouseExit(self)
 	self.owner:ExitRow(self)
 end
 
-local function BuildBookListPostHook()
-	for _, controlObject in ipairs(LORE_LIBRARY.list.list.activeControls) do
-		controlObject:SetHandler("OnMouseUp", OnRowMouseUp)
-		controlObject:SetHandler("OnMouseEnter", function(self) OnMouseEnter(self, controlObject.categoryIndex, controlObject.collectionIndex, controlObject.bookIndex) end)
-		controlObject:SetHandler("OnMouseExit", function(self) OnMouseExit(self) end)
+function BuildBookListPostHook()
+	local orgCallback = LORE_LIBRARY.list.list.dataTypes[1].setupCallback
+	LORE_LIBRARY.list.list.dataTypes[1].setupCallback = function(control, data)
+		orgCallback(control, data)
+		if not control.lbhooked then
+			control.lbhooked = true
+			control:SetHandler("OnMouseUp", OnRowMouseUp)
+			control:SetHandler("OnMouseEnter", function(control) OnMouseEnter(control, control.categoryIndex, control.collectionIndex, control.bookIndex) end)
+			control:SetHandler("OnMouseExit", function(control) OnMouseExit(control) end)
+		end
 	end
 end
 
@@ -1844,7 +1587,7 @@ local function EmulateLibrary()
 	
 end
 
-local function RebuildLoreLibrairy()
+local function RebuildLoreLibrary()
 	
 	loreLibraryReportKeybind =
 	{
@@ -2060,7 +1803,7 @@ local function OnBookLearned(_, categoryIndex)
 	BuildLoreBookSummary()
 	
 	-- LORE_LIBRARY need to be refreshed first
-	zo_callLater(function() ShowCongrats(true) end, 50)
+	--zo_callLater(function() ShowCongrats(true) end, 50)
 	
 end
 
@@ -2381,7 +2124,7 @@ local function CreateSettingsMenu()
 				ToggleShareData()
 				end,
 			default = defaults.shareData,
-			disabled = GetWorldName() ~= "EU Megaserver" or not (lang == "fr" or lang == "en" or lang == "de")
+			disabled = GetWorldName() == "PTS" or not (lang == "fr" or lang == "en" or lang == "de")
 		},
 	}
 	LAM:RegisterOptionControls(ADDON_NAME, optionsTable)
@@ -2400,7 +2143,7 @@ local function OnLoad(eventCode, name)
 		CreateSettingsMenu()
 		
 		-- Lorelibrary
-		RebuildLoreLibrairy()
+		RebuildLoreLibrary()
 		
 		-- Tooltip Mode
 		OnGamepadPreferredModeChanged()
@@ -2420,7 +2163,7 @@ local function OnLoad(eventCode, name)
 		--events
         EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_SHOW_BOOK, OnShowBook)
 		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_LORE_BOOK_LEARNED, OnBookLearned)
-		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_PLAYER_ACTIVATED, ShowCongrats)
+		--EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_PLAYER_ACTIVATED, ShowCongrats)
 		EVENT_MANAGER:RegisterForEvent(ADDON_NAME, EVENT_GAMEPAD_PREFERRED_MODE_CHANGED, OnGamepadPreferredModeChanged)
 		
 	end

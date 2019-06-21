@@ -28,13 +28,18 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 ]]
 
 --Libraries--------------------------------------------------------------------
-local LAM = LibStub("LibAddonMenu-2.0")
-local LMP = LibStub("LibMapPins-1.0")
-local GPS = LibStub("LibGPS2")
+local LAM = LibAddonMenu2
+if LAM == nil and LibStub then LAM = LibStub("LibAddonMenu-2.0") end
+local LMP = LibMapPins
+if LMP == nil and LibStub then LMP = LibStub("LibMapPins-1.0") end
+local GPS = LibGPS2
+if GPS == nil and LibStub then GPS = LibStub("LibGPS2") end
+
+if LAM == nil or LMP == nil or GPS == nil then return end
 
 --Local constants -------------------------------------------------------------
 local ADDON_NAME = "SkyShards"
-local ADDON_VERSION = "10.6"
+local ADDON_VERSION = "10.14"
 local ADDON_WEBSITE = "http://www.esoui.com/downloads/info128-SkyShards.html"
 local PINS_UNKNOWN = "SkySMapPin_unknown"
 local PINS_COLLECTED = "SkySMapPin_collected"
@@ -107,7 +112,7 @@ pinTooltipCreator.creator = function(pin)
 
 	if IsInGamepadPreferredMode() then
 		INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, zo_strformat("<<1>>", name), INFORMATION_TOOLTIP.tooltip:GetStyle("mapTitle"))
-		INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, icon, zo_strformat("(<<1>>) <<2>>", pinTag[4], description), {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_3})
+		INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, zo_strformat("(<<1>>) <<2>>", pinTag[4], description), {fontSize = 27, fontColorField = GAMEPAD_TOOLTIP_COLOR_GENERAL_COLOR_3})
 		if info[1] then
 			INFORMATION_TOOLTIP:LayoutIconStringLine(INFORMATION_TOOLTIP.tooltip, nil, table.concat(info, " / "), INFORMATION_TOOLTIP.tooltip:GetStyle("worldMapTooltip"))
 		end
@@ -122,9 +127,18 @@ pinTooltipCreator.creator = function(pin)
 
 end
 
+-- eventually I'll update LibMapPins with this so it can work for everyone
+function SkyShards_GetZoneAndSubZone(alternative)
+	if alternative then
+		return select(3,(GetMapTileTexture()):lower():gsub("ui_map_", ""):find("maps/([%w%-]+/[%w%-]+_[%w%-]+)"))
+	end
+
+	return select(3,(GetMapTileTexture()):lower():gsub("ui_map_", ""):find("maps/([%w%-]+)/([%w%-]+_[%w%-]+)"))
+end
+
 local function CompassCallback()
 	if GetMapType() <= MAPTYPE_ZONE and db.filters[PINS_COMPASS] then
-		local zone, subzone = LMP:GetZoneAndSubzone()
+		local zone, subzone = Skyshards_GetZoneAndSubZone()
 		local skyshards = SkyShards_GetLocalData(zone, subzone)
 		if skyshards then
 			for _, pinData in ipairs(skyshards) do
@@ -222,7 +236,7 @@ local function CreatePins()
 
 	local shouldDisplay = ShouldDisplaySkyshards()
 
-	local zone, subzone = LMP:GetZoneAndSubzone()
+	local zone, subzone = SkyShards_GetZoneAndSubZone()
 	local skyshards = SkyShards_GetLocalData(zone, subzone)
 
 	if skyshards ~= nil then
@@ -306,7 +320,7 @@ local function ShowMyPosition()
 	local locX = ("%05.02f"):format(zo_round(x*10000)/100)
 	local locY = ("%05.02f"):format(zo_round(y*10000)/100)
 
-	MyPrint(zo_strformat("<<1>>: <<2>>\195\151<<3>> (<<4>>)", GetMapName(), locX, locY, LMP:GetZoneAndSubzone(true)))
+	MyPrint(zo_strformat("<<1>>: <<2>>\195\151<<3>> (<<4>>)", GetMapName(), locX, locY, SkyShards_GetZoneAndSubZone(true)))
 
 end
 SLASH_COMMANDS["/mypos"] = ShowMyPosition
@@ -537,7 +551,7 @@ local function CreateSettingsMenu()
 	LAM:RegisterOptionControls(ADDON_NAME, optionsTable)
 end
 
-local function GetNumSkySkyShards()
+local function GetNumFoundSkyShards()
 
 	collectedSkyShards = 0
 	totalSkyShards = 0
@@ -561,7 +575,7 @@ end
 local function AlterSkyShardsIndicator()
 
 	local function PreHookRefreshSkillPointInfo(self)				-- keyboard function
-
+		GetNumFoundSkyShards()
     	local availablePoints = SKILL_POINT_ALLOCATION_MANAGER:GetAvailableSkillPoints()
     	self.availablePointsLabel:SetText(zo_strformat(SI_SKILLS_POINTS_TO_SPEND, availablePoints))
 
@@ -583,7 +597,7 @@ local function AlterSkyShardsIndicator()
 	end
 
 	local function PreHookRefreshPointsDisplay(self)		-- gamepad function
-
+		GetNumFoundSkyShards()
 		local availablePoints = GetAvailableSkillPoints()
 		self.headerData.data1Text = availablePoints
 
@@ -608,7 +622,7 @@ local function AlterSkyShardsIndicator()
 
 	end
 
-	GetNumSkySkyShards()
+	GetNumFoundSkyShards()
 	ZO_PreHook(SKILLS_WINDOW, "RefreshSkillPointInfo", PreHookRefreshSkillPointInfo)
 	ZO_PreHook(GAMEPAD_SKILLS, "RefreshPointsDisplay", PreHookRefreshPointsDisplay)
 
@@ -622,7 +636,7 @@ local function OnAchievementUpdate(_, achievementId)
 		LMP:RefreshPins(PINS_UNKNOWN)
 		LMP:RefreshPins(PINS_COLLECTED)
 		COMPASS_PINS:RefreshPins(PINS_COMPASS)
-		GetNumSkySkyShards()
+--		GetNumFoundSkyShards()
 	end
 end
 

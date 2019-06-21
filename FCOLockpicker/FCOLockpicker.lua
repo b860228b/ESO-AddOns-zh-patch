@@ -6,7 +6,9 @@ Show number of lockpicks left at chests in different colors, depending on the lo
 ]]
 ------------------------------------------------------------------
 -- Create the filter object for addon libFilters
-local LAM 		 = LibStub('LibAddonMenu-2.0')
+local LAM = LibAddonMenu2
+if LAM == nil and LibStub then LAM = LibStub('LibAddonMenu-2.0') end
+
 --Global addon variable
 FCOLP = {}
 local FCOLP = FCOLP
@@ -39,7 +41,7 @@ FCOLP.addonVars.addonNameMenu				= "FCO Lockpicker"
 FCOLP.addonVars.addonNameMenuDisplay		= "|c00FF00FCO |cFFFF00Lockpicker|r"
 FCOLP.addonVars.addonAuthor 				= '|cFFFF00Baertram|r'
 FCOLP.addonVars.addonVersion		   		= 0.01 -- Changing this will reset SavedVariables!
-FCOLP.addonVars.addonVersionOptions 		= '0.0.93' -- version shown in the settings panel
+FCOLP.addonVars.addonVersionOptions 		= '0.1' -- version shown in the settings panel
 FCOLP.addonVars.addonSavedVariablesName		= "FCOLockpicker_Settings"
 FCOLP.addonVars.gAddonLoaded				= false
 
