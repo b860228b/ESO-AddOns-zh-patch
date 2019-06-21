@@ -9,6 +9,6 @@ Work in progress:
   Destinations(3.0.0)
   
 Done:
-  FCOLockpicker(0.0.93)
-  Lorebooks(12.1)
-  SkyShards(10.6)
+  FCOLockpicker(0.1)
+  Lorebooks(15.4)
+  SkyShards(10.14)
