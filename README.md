@@ -11,4 +11,4 @@ Work in progress:
 Done:
   FCOLockpicker(0.1)
   Lorebooks(15.4)
-  SkyShards(10.14)
+  SkyShards(10.26)

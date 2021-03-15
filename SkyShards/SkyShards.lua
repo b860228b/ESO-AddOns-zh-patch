@@ -29,17 +29,12 @@ http://creativecommons.org/licenses/by-nc-sa/4.0/legalcode
 
 --Libraries--------------------------------------------------------------------
 local LAM = LibAddonMenu2
-if LAM == nil and LibStub then LAM = LibStub("LibAddonMenu-2.0") end
 local LMP = LibMapPins
-if LMP == nil and LibStub then LMP = LibStub("LibMapPins-1.0") end
 local GPS = LibGPS2
-if GPS == nil and LibStub then GPS = LibStub("LibGPS2") end
-
-if LAM == nil or LMP == nil or GPS == nil then return end
 
 --Local constants -------------------------------------------------------------
 local ADDON_NAME = "SkyShards"
-local ADDON_VERSION = "10.14"
+local ADDON_VERSION = "10.26"
 local ADDON_WEBSITE = "http://www.esoui.com/downloads/info128-SkyShards.html"
 local PINS_UNKNOWN = "SkySMapPin_unknown"
 local PINS_COLLECTED = "SkySMapPin_collected"
@@ -127,18 +122,9 @@ pinTooltipCreator.creator = function(pin)
 
 end
 
--- eventually I'll update LibMapPins with this so it can work for everyone
-function SkyShards_GetZoneAndSubZone(alternative)
-	if alternative then
-		return select(3,(GetMapTileTexture()):lower():gsub("ui_map_", ""):find("maps/([%w%-]+/[%w%-]+_[%w%-]+)"))
-	end
-
-	return select(3,(GetMapTileTexture()):lower():gsub("ui_map_", ""):find("maps/([%w%-]+)/([%w%-]+_[%w%-]+)"))
-end
-
 local function CompassCallback()
 	if GetMapType() <= MAPTYPE_ZONE and db.filters[PINS_COMPASS] then
-		local zone, subzone = Skyshards_GetZoneAndSubZone()
+		local zone, subzone = LMP:GetZoneAndSubzone(false, true)
 		local skyshards = SkyShards_GetLocalData(zone, subzone)
 		if skyshards then
 			for _, pinData in ipairs(skyshards) do
@@ -236,7 +222,7 @@ local function CreatePins()
 
 	local shouldDisplay = ShouldDisplaySkyshards()
 
-	local zone, subzone = SkyShards_GetZoneAndSubZone()
+	local zone, subzone = LMP:GetZoneAndSubzone(false, true)
 	local skyshards = SkyShards_GetLocalData(zone, subzone)
 
 	if skyshards ~= nil then
@@ -267,11 +253,7 @@ local function QueueCreatePins(pinType)
 	if not updating then
 		updating = true
 		if IsPlayerActivated() then
-			if LMP.AUI.IsMinimapEnabled() then -- "Cleaner code" is in Destinations addon, but even if adding all checks this addon does the result is same. Duplicates are created with AUI
-				zo_callLater(CreatePins, 150) -- Didn't find anything proper than this. If other MiniMap addons are loaded, It will fail and create duplicates
-			else
-				CreatePins() -- Normal way. AUI will fire its refresh after this code has run so it will create duplicates if left "as is".
-			end
+            CreatePins()
 		else
 			EVENT_MANAGER:RegisterForEvent("SkyShards_PinUpdate", EVENT_PLAYER_ACTIVATED,
 				function(event)
@@ -317,14 +299,13 @@ local function ShowMyPosition()
 
 	local x, y = GetMapPlayerPosition("player")
 
-	local locX = ("%05.02f"):format(zo_round(x*10000)/100)
-	local locY = ("%05.02f"):format(zo_round(y*10000)/100)
+	local locX = ("%02.04f"):format(zo_round(x*10000)/10000)
+	local locY = ("%02.04f"):format(zo_round(y*10000)/10000)
 
-	MyPrint(zo_strformat("<<1>>: <<2>>\195\151<<3>> (<<4>>)", GetMapName(), locX, locY, SkyShards_GetZoneAndSubZone(true)))
+	MyPrint(zo_strformat("<<1>>: <<2>>\195\151<<3>> (<<4>>/<<5>>)", GetMapName(), locX, locY, LMP:GetZoneAndSubzone(false, true)))
 
 end
-SLASH_COMMANDS["/mypos"] = ShowMyPosition
-SLASH_COMMANDS["/myloc"] = ShowMyPosition
+SLASH_COMMANDS["/skypos"] = ShowMyPosition
 
 -- Gamepad Switch -------------------------------------------------------------
 local function OnGamepadPreferredModeChanged()
