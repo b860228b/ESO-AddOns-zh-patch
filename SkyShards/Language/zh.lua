@@ -6,15 +6,14 @@
 --ImRyckDer
 
 
-
 --tooltips
 SafeAddString(SKYS_KNOWN,                 "已收集", 1)
 
 SafeAddString(SKYS_MOREINFO1,             "城镇", 1)
---SafeAddString(SKYS_MOREINFO2,             "Solo dungeon", 1)
---SafeAddString(SKYS_MOREINFO3,             "Public dungeon", 1)
---SafeAddString(SKYS_MOREINFO4,             "Under ground", 1)
---SafeAddString(SKYS_MOREINFO5,             "Group Delve", 1)
+SafeAddString(SKYS_MOREINFO2,             "单人地牢", 1)
+SafeAddString(SKYS_MOREINFO3,             "公共地牢", 1)
+SafeAddString(SKYS_MOREINFO4,             "地下", 1)
+SafeAddString(SKYS_MOREINFO5,             "团队探索", 1)
 
 SafeAddString(SKYS_SET_WAYPOINT,          "将航点设置为天空碎片", 1)
 
